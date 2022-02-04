@@ -39,7 +39,7 @@ const SignIn = () => {
                     <ErrorMessage text={error}/>
                 }
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-1 area" controlId="formBasicEmail">
+                    <Form.Group className="mb-1 area">
                         <Form.Label className='area-title'>E-mail</Form.Label>
                         <Form.Control 
                             type="email"
@@ -47,9 +47,10 @@ const SignIn = () => {
                             disabled={disabled}
                             value={email}
                             onChange={e=>setEmail(e.target.value)} 
+                            required
                         />
                     </Form.Group>
-                    <Form.Group className="mb-1 area" controlId="formBasicPassword">
+                    <Form.Group className="mb-1 area">
                         <Form.Label className='area-title'>Senha</Form.Label>
                         <Form.Control
                             type="password"
@@ -57,9 +58,10 @@ const SignIn = () => {
                             disabled={disabled}
                             value={password}
                             onChange={e=>setPassword(e.target.value)}
+                            required
                         />
                     </Form.Group>
-                    <Form.Group className="mb-1 area" controlId="formBasicCheckbox">
+                    <Form.Group className="mb-1 area">
                         <Form.Label className='area-title'>Lembrar Senha</Form.Label>
                         <Form.Check
                             type="checkbox"
@@ -68,7 +70,7 @@ const SignIn = () => {
                             onClick={()=>setRememberPassword(!rememberPassword)}
                         />
                     </Form.Group>
-                    <Form.Group className="mb-1 area" controlId="formBasicCheckbox">
+                    <Form.Group className="mb-1 area">
                         <Form.Label className='area-title'></Form.Label>
                         <Button variant="primary" type="submit" disabled={disabled}>Fazer Login</Button>
                     </Form.Group>

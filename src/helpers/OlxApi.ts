@@ -6,6 +6,11 @@ type BodyType = {
     password: string,
     token?: string
 }
+export interface State {
+    _id: string;
+    name: string;
+}
+
 const BASEAPI = 'http://alunos.b7web.com.br:501'
 
 const apiFetchPost = async (endpoint: string, body: BodyType) => {
@@ -51,6 +56,11 @@ const apiFetchGet = async (endpoint: string, body: BodyType) => {
 
     return json;
 }
+const apiFetchGetStates = async (endpoint: string) => {
+    const res = await fetch(`${BASEAPI+endpoint}`);
+    const json = await res.json();
+    return json;
+}
 
 const OlxAPI = {
     login: async (email: string, password: string) => {
@@ -59,7 +69,13 @@ const OlxAPI = {
             {email, password}
         );
         return json;
+    },
+    getStates: async () => {
+        const json = await apiFetchGetStates(
+            '/states'
+        );
+        return json.states;
     }
-}
+};
 
 export default () => OlxAPI;
