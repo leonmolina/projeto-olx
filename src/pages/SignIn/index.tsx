@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import useApi from '../../helpers/OlxApi';
 import { doLogin } from '../../helpers/AuthHandler';
@@ -17,6 +17,7 @@ const SignIn = () => {
     const handleSubmit = async (e: React.FormEvent<EventTarget>) => {
         e.preventDefault();
         setDisabled(true);
+        setError('')
 
         const json = await api.login(email, password);
 
