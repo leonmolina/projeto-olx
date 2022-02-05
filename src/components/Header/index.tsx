@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import './header.css';
+import './style.css';
 import logo from './images/logo-lm.png'
 
 import { isLogged, doLogout } from '../../helpers/AuthHandler';

@@ -1,18 +1,23 @@
-.signin-title {
+/* TITLE */
+.signup-title {
     padding: 20px 0;
 }
-form {
+/* SIGNUP FORM */
+.signup-form {
     background-color: #FFF;
     border-radius: 3px;
     padding: 10px;
     box-shadow: 0px 0px 3px #999;
 }
+    /* FORM GROUPS */
 .area {
     display: flex;
     align-items: center;
     padding: 10px;
     max-width: 500px;
+    margin-bottom: 0.25rem !important;
 }
+        /* INPUT LABELS */
 .area-title {
     width: 200px;
     text-align: right;
@@ -20,9 +25,11 @@ form {
     font-weight: bold;
     font-size: 14px;
 }
+        /* INPUTS */
 .area-input {
     flex: 1;
 }
+        /* INPUTS ON FOCUS */
 .form-control:focus {
     outline: 0;
     transition: all ease .4s;

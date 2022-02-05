@@ -1,18 +1,15 @@
+/* TITLE */
 .signin-title {
     padding: 20px 0;
 }
-form {
-    background-color: #FFF;
-    border-radius: 3px;
-    padding: 10px;
-    box-shadow: 0px 0px 3px #999;
-}
+/* FORM GROUPS */
 .area {
     display: flex;
     align-items: center;
     padding: 10px;
     max-width: 500px;
 }
+    /*INPUT LABELS*/
 .area-title {
     width: 200px;
     text-align: right;
@@ -20,13 +17,7 @@ form {
     font-weight: bold;
     font-size: 14px;
 }
+    /* INPUTS */
 .area-input {
     flex: 1;
-}
-.form-control:focus {
-    outline: 0;
-    transition: all ease .4s;
-    box-shadow: none;
-    border: 1px solid #333;
-    color: #333;
 }

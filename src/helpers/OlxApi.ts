@@ -1,12 +1,17 @@
 import Cookies from "js-cookie";
 import qs from 'qs';
 
+// TYPES
 type BodyType = {
     email: string,
     password: string,
     token?: string,
     name?: string,
     state?: string
+}
+type AdsType = {
+    sort: string,
+    limit: number
 }
 export interface State {
     _id: string;
@@ -18,7 +23,6 @@ export interface Category {
     slug: string;
     _id: string;
 }
-
 export interface Ad {
     id: string;
     image: string;
@@ -26,14 +30,9 @@ export interface Ad {
     priceNegotiable: boolean;
     title: string;
 }
-
-type AdsType = {
-    sort: string,
-    limit: number
-}
-
+// BASE URL
 const BASEAPI = 'http://alunos.b7web.com.br:501'
-
+// FETCH
 const apiFetchPost = async (endpoint: string, body: BodyType) => {
     if(!body.token) {
         let token = Cookies.get('token');
@@ -114,14 +113,12 @@ const OlxAPI = {
         );
         return json.states;
     },
-
     getCategories: async () => {
         const json = await apiFetchGetCategories(
             '/categories'
         );
         return json.categories;
     },
-
     getAds: async (options: AdsType) => {
         const json = await apiFetchGetAds(
             '/ad/list',
@@ -130,5 +127,4 @@ const OlxAPI = {
         return json;
     }
 };
-
 export default () => OlxAPI;

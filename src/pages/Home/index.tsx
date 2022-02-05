@@ -1,16 +1,21 @@
-import { useState, useEffect } from 'react';
+// CSS AND BOOTSTRAP
 import './style.css';
-import useApi, {State, Category, Ad}  from '../../helpers/OlxApi';
+import { Container, Form, Button } from 'react-bootstrap';
+// REACT
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+// REQUISITION AND PARTIALS
+import useApi, {State, Category, Ad}  from '../../helpers/OlxApi';
 import AdItem from '../../components/partials/AdItem';
 
-const Home = () => {
-    const api = useApi();
 
+const Home = () => {
+// API CALL AND USE STATES
+    const api = useApi();
     const [stateList, setStateList] = useState<State[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const [adList, setAdList] = useState<Ad[]>([]);
-
+// STATES - USE EFFECT
     useEffect(()=>{
         const getStates = async () => {
             const slist = await api.getStates();
@@ -18,7 +23,7 @@ const Home = () => {
         }
         getStates();
     }, []);
-
+// CATEGORIES - USE EFFECT
     useEffect(()=>{
         const getCategories = async () => {
             const cats = await api.getCategories();
@@ -26,7 +31,7 @@ const Home = () => {
         }
         getCategories();
     }, []);
-
+// ADS - USE EFFECT
     useEffect(()=>{
         const getRecentAds = async () => {
             const json = await api.getAds({
@@ -40,19 +45,37 @@ const Home = () => {
 
     return (
         <>
-            <div className="container-fluid search-area">
-                <div className='container'>
+            {/* SEARCH CONTAINER */}
+            <Container fluid className='search-area'>
+                <Container>
+                    {/* SEARCH BAR */}
                     <div className="search-box">
-                        <form className="search-form" method="GET" action="/ads">
-                            <input type="text" name="q" placeholder='O que você procura?' />
-                            <select name="state">
-                                {stateList.map((i, k)=>
-                                    <option key={k} value={i.name}>{i.name}</option>
-                                )}
-                            </select>
-                            <button>Pesquisar</button>
-                        </form>
+                        {/* SEARCH FORM */}
+                        <Form className="search-form row" method="GET" action="/ads">
+                            {/* SEARCH TEXT */}
+                            <div className='col-lg-9'>
+                                <Form.Control
+                                        type="text"
+                                        className="search-input search-input--text"
+                                        name="q"
+                                        placeholder='O que você procura?'>
+                                </Form.Control>
+                            </div>
+                            {/* SEARCH SELECT */}
+                            <div className='col-lg-1'>
+                                <Form.Select name="state" className='search-input search-input--select'>
+                                    {stateList.map((i, k)=>
+                                        <option key={k} value={i.name}>{i.name}</option>
+                                    )}
+                                </Form.Select>
+                            </div>
+                            {/* SEARCH BUTTON */}
+                            <div className='col-lg-2'>
+                                <Button variant="primary" type="submit" className="search-button">Pesquisar</Button>
+                            </div>
+                        </Form>
                     </div>
+                    {/* CATEGORY LIST */}
                     <div className="category-list">
                         {categories.map((i, k)=>
                             <Link key={k} to={`/ads?cat=${i.slug}`} className='category-item'>
@@ -61,9 +84,10 @@ const Home = () => {
                             </Link>
                         )}
                     </div>
-                </div>
-            </div>
-            <div className="container">
+                </Container>
+            </Container>
+            {/* ADS CONTAINER */}
+            <Container>
                 <div className='page-area'>
                     <h2>Anúncios Recentes</h2>
                     <div className="list">
@@ -75,7 +99,7 @@ const Home = () => {
                     <hr />
                     <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo dolore pariatur voluptatum recusandae tempore eaque error quaerat temporibus cum labore ducimus rerum perferendis quasi, incidunt commodi possimus beatae eos voluptatem.</span>
                 </div>
-            </div>
+            </Container>
         </>
     );
 }

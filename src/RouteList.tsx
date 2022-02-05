@@ -1,8 +1,8 @@
 import { useRoutes } from "react-router-dom";
 
-import NotFound from "./pages/NotFound/NotFound";
+import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
-import About from "./pages/About/About";
+import About from "./pages/About";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
