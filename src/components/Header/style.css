@@ -2,7 +2,7 @@ header {
     background-color: #FFF;
     border-bottom: 1px solid #CCC;
 }
-a, .logout-button {
+header a, .logout-button {
     text-decoration: none;
     color: #000;
     background: none;

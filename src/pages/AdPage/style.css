@@ -1,0 +1,29 @@
+.ad-page--area {
+    display: flex;
+    margin-top: 20px;
+}
+.box {
+    background-color: #FFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px #999;
+    margin-bottom: 20px;
+}
+.left-side {
+    flex: 1;
+    margin-right: 20px;
+}
+.ad-image {
+
+}
+.ad-info {
+    padding: 10px;
+}
+.ad-name {
+
+}
+.ad-description {
+
+}
+.right-side {
+    width: 250px;
+}

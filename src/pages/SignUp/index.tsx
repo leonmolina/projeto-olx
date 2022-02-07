@@ -1,5 +1,4 @@
-// CSS AND BOOTSTRAP
-import './style.css';
+// BOOTSTRAP
 import { Form, Button, Container } from 'react-bootstrap';
 // REACT
 import React, { useState, useEffect } from 'react';
@@ -54,7 +53,7 @@ const SignUp = () => {
             {/* SIGN UP CONTAINER */}
             <Container>
                 {/* TITLE */}
-                <div className="signup-title">
+                <div className="forms-title">
                     <h3>Cadastro</h3>
                 </div>
                 {/* SIGN UP AREA */}
@@ -63,7 +62,7 @@ const SignUp = () => {
                         <ErrorMessage text={error}/>
                     }
                     {/* FORM */}
-                    <Form onSubmit={handleSubmit} className="signup-form">
+                    <Form onSubmit={handleSubmit} className="forms">
                         {/* NAME */}
                         <Form.Group className="area">
                             <Form.Label className='area-title'>Nome Completo</Form.Label>

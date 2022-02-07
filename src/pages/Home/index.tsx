@@ -41,6 +41,7 @@ const Home = () => {
             setAdList(json.ads);
         }
         getRecentAds();
+        console.log(adList)
     }, []);
 
     return (
@@ -88,11 +89,11 @@ const Home = () => {
             </Container>
             {/* ADS CONTAINER */}
             <Container>
-                <div className='page-area'>
+                <div className='home-page--area'>
                     <h2>Anúncios Recentes</h2>
                     <div className="list">
                         {adList.map((i, k)=>
-                            <AdItem key={k} />
+                            <AdItem key={k} data={i}/>
                         )}
                     </div>
                     <Link to="/ads" className='see-all-link'>Ver Todos</Link>

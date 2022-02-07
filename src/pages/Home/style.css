@@ -38,9 +38,6 @@
     width: 100%;
 }
 /* CATEGORY LIST */
-.page-area h2 {
-    font-size: 20px;
-}
 .category-list {
     display: flex;
     flex-wrap: wrap;
@@ -64,9 +61,15 @@
     margin-right: 10px;
 }
 /* LIST */
+.home-page--area h2 {
+    font-size: 20px;
+}
 .list {
     display: flex;
     flex-wrap: wrap;
+}
+.list .ad-item {
+    width: 25%;
 }
 .see-all-link {
     color: #000;

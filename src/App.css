@@ -8,3 +8,40 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: #EEE;
 }
+/* FORM GROUPS */
+.area {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  max-width: 500px;
+  margin-bottom: 0.25rem !important;
+}
+.forms {
+  background-color: #FFF;
+  border-radius: 3px;
+  padding: 10px;
+  box-shadow: 0px 0px 3px #999;
+}
+.forms-title {
+  padding: 20px 0;
+}
+/* INPUTS */
+.area-input {
+  flex: 1;
+}
+/*INPUT LABELS*/
+.area-title {
+  width: 200px;
+  text-align: right;
+  padding-right: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+/* INPUTS ON FOCUS */
+.form-control:focus {
+  outline: 0;
+  transition: all ease .4s;
+  box-shadow: none;
+  border: 1px solid #333;
+  color: #333;
+}
