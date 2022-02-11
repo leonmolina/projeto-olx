@@ -12,7 +12,8 @@ import { useEffect, useState } from 'react';
 const AdPage = () => {
 // API CALL AND HOOK
     const api = useApi();
-    const { id } = useParams();
+    const slug = useParams();
+    const id = slug.item;
 
     const [loading, setLoading] = useState(true);
     const [adInfo, setAdInfo] = useState<Ad>(Object);
@@ -26,7 +27,7 @@ const AdPage = () => {
         }
         getAdInfo(id);
         console.log(adInfo)
-        console.log('sexo')
+        console.log(id)
     }, []);
 
     return (
