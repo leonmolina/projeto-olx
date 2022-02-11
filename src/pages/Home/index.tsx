@@ -5,7 +5,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // REQUISITION AND PARTIALS
-import useApi, {State, Category, Ad}  from '../../helpers/OlxApi';
+import useApi, {State, Category, Ads}  from '../../helpers/OlxApi';
 import AdItem from '../../components/partials/AdItem';
 
 
@@ -14,7 +14,7 @@ const Home = () => {
     const api = useApi();
     const [stateList, setStateList] = useState<State[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
-    const [adList, setAdList] = useState<Ad[]>([]);
+    const [adList, setAdList] = useState<Ads[]>([]);
 // STATES - USE EFFECT
     useEffect(()=>{
         const getStates = async () => {
@@ -54,7 +54,7 @@ const Home = () => {
                         {/* SEARCH FORM */}
                         <Form className="search-form row" method="GET" action="/ads">
                             {/* SEARCH TEXT */}
-                            <div className='col-lg-9'>
+                            <div className='col-lg-9 col-md-6 col-sm-6'>
                                 <Form.Control
                                         type="text"
                                         className="search-input search-input--text"
@@ -63,7 +63,7 @@ const Home = () => {
                                 </Form.Control>
                             </div>
                             {/* SEARCH SELECT */}
-                            <div className='col-lg-1'>
+                            <div className='col-lg-1 col-md-4 col-sm-4'>
                                 <Form.Select name="state" className='search-input search-input--select'>
                                     {stateList.map((i, k)=>
                                         <option key={k} value={i.name}>{i.name}</option>
@@ -71,7 +71,7 @@ const Home = () => {
                                 </Form.Select>
                             </div>
                             {/* SEARCH BUTTON */}
-                            <div className='col-lg-2'>
+                            <div className='col-lg-2 col-md-2 col-sm-2'>
                                 <Button variant="primary" type="submit" className="search-button">Pesquisar</Button>
                             </div>
                         </Form>

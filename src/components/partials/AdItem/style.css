@@ -1,4 +1,4 @@
-.ad-item a {
+.announced-item a {
     display: block;
     border: 1px solid #FFF;
     margin: 10px;
@@ -9,7 +9,7 @@
     background-color: #FFF;
     transition: all ease .2s;
 }
-.ad-item a:hover {
+.announced-item a:hover {
     border: 1px solid #CCC;
     background-color: #EEE;
 }

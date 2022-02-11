@@ -13,6 +13,10 @@ type AdsType = {
     sort: string,
     limit: number
 }
+type AdType = {
+    id: string,
+    other: boolean
+}
 export interface State {
     _id: string;
     name: string;
@@ -23,12 +27,35 @@ export interface Category {
     slug: string;
     _id: string;
 }
-export interface Ad {
+export interface Ads {
     id: string;
     image: string;
     price: number;
     priceNegotiable: boolean;
     title: string;
+}
+export interface Ad {
+    category: {
+        name: string;
+        slug: string;
+        _id: string;
+    };
+    dateCreated: string;
+    description: string;
+    id: string;
+    images: [
+        string
+    ];
+    others: boolean | null;
+    price: number;
+    priceNegotiable: boolean;
+    stateName: string;
+    title: string;
+    userInfo: {
+        email: string;
+        name: string;
+    };
+    views: number
 }
 // BASE URL
 const BASEAPI = 'http://alunos.b7web.com.br:501'
@@ -91,6 +118,11 @@ const apiFetchGetAds = async (endpoint: string, options: AdsType) => {
     const json = await res.json();
     return json;
 }
+const apiFetchGetAd = async (endpoint: string, options: AdType) => {
+    const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(options.id)}`);
+    const json = await res.json();
+    return json;
+}
 
 const OlxAPI = {
     login: async (email: string, password: string) => {
@@ -123,6 +155,13 @@ const OlxAPI = {
         const json = await apiFetchGetAds(
             '/ad/list',
             options
+        );
+        return json;
+    },
+    getAd: async (id: string, other: boolean) => {
+        const json = await apiFetchGetAd(
+            '/ad/item',
+            {id, other}
         );
         return json;
     }

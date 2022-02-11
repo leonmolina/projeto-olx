@@ -1,7 +1,7 @@
 import './style.css';
 import { Link } from 'react-router-dom';
 
-type AdType = {
+type AnnouncedType = {
     data: {
         id: string,
         image: string,
@@ -11,7 +11,7 @@ type AdType = {
     }
 }
 
-const AdItem = (props: AdType) => {
+const AdItem = (props: AnnouncedType) => {
     let price = '';
 
     if(props.data.priceNegotiable) {
@@ -21,14 +21,14 @@ const AdItem = (props: AdType) => {
     }
 
     let img = '';
-    if(props.data.image == "http://alunos.b7web.com.br:501/media/default.jpg") {
+    if(props.data.image === "http://alunos.b7web.com.br:501/media/default.jpg") {
         img = "http://alunos.b7web.com.br:501/media/1ea1dd36-93c5-49ed-89e8-3459de5e725e.jpg"
     } else {
         img = props.data.image
     }
 
     return (
-        <div className='ad-item'>
+        <div className='announced-item'>
             <Link to={`/ad/${props.data.id}`}>
                 <div className="item-image">
                     <img src={img} alt="Imagem do produto anunciado" />

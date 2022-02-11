@@ -68,7 +68,7 @@
     display: flex;
     flex-wrap: wrap;
 }
-.list .ad-item {
+.list .announced-item {
     width: 25%;
 }
 .see-all-link {

@@ -1,4 +1,4 @@
-.ad-page--area {
+.item-page--area {
     display: flex;
     margin-top: 20px;
 }
@@ -8,20 +8,23 @@
     box-shadow: 0px 0px 4px #999;
     margin-bottom: 20px;
 }
+.box-padding {
+    padding: 10px;
+}
 .left-side {
     flex: 1;
     margin-right: 20px;
 }
-.ad-image {
+.item-img {
 
 }
-.ad-info {
+.item-info {
     padding: 10px;
 }
-.ad-name {
-
+.item-name {
+    margin-bottom: 20px;
 }
-.ad-description {
+.item-description {
 
 }
 .right-side {
