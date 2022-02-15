@@ -118,6 +118,8 @@ const apiFetchGetAds = async (endpoint: string, options: AdsType) => {
 }
 const apiFetchGetAd = async (endpoint: string, options: AdType) => {
     const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(options.id)}`);
+    // const res = await fetch(`${BASEAPI+endpoint}?id=${options.id}`);
+    // const res = await fetch(`${BASEAPI+endpoint}?id=5dc1adfde9ce3914e638b666`);
     const json = await res.json();
     return json;
 }
