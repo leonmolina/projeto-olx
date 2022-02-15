@@ -14,7 +14,7 @@ type AdsType = {
     limit: number
 }
 type AdType = {
-    id: string,
+    id: string | undefined,
     other: boolean
 }
 export interface State {
@@ -43,9 +43,7 @@ export interface Ad {
     dateCreated: string;
     description: string;
     id: string;
-    images: [
-        string
-    ];
+    images: string[];
     others: boolean | null;
     price: number;
     priceNegotiable: boolean;
@@ -158,11 +156,12 @@ const OlxAPI = {
         );
         return json;
     },
-    getAd: async (id: string, other: boolean) => {
+    getAd: async (id: string | undefined, other: boolean) => {
         const json = await apiFetchGetAd(
             '/ad/item',
             {id, other}
         );
+        console.log(id)
         return json;
     }
 };
