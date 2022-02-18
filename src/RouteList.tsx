@@ -14,6 +14,6 @@ export const RouteList = () => {
         { path: '/about', element: <About />},
         { path: '/signin', element: <SignIn />},
         { path: '/signup', element: <SignUp />},
-        { path: '/ad/:item', element: <AdPage />}
+        { path: '/ad/:id', element: <AdPage />}
     ]);
 }
