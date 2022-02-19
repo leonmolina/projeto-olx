@@ -35,16 +35,22 @@ const AdPage = () => {
                         <div className="box">
                             <div className="item-img">
                                 {loading && <Fake height={300} />}
-                                {adInfo.title &&
-                                    <h2>{adInfo.title}</h2>
+                                {adInfo.images &&
+                                    <img src={adInfo.images[0]} alt="" />
                                 }
                             </div>
                             <div className="item-info">
                                 <div className="item-name">
                                     {loading && <Fake height={20} />}
+                                    {adInfo.title &&
+                                        <h2>{adInfo.title}</h2>
+                                    }   
                                 </div>
                                 <div className="item-description">
                                     {loading && <Fake height={100} />}
+                                    {adInfo.description &&
+                                        <span>{adInfo.description}</span>
+                                    }
                                 </div>
                             </div>
                         </div>
