@@ -44,7 +44,7 @@ export interface Ad {
     description: string;
     id: string;
     images: string[];
-    others: boolean | null;
+    others: boolean;
     price: number;
     priceNegotiable: boolean;
     stateName: string;

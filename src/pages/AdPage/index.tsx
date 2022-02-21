@@ -4,6 +4,7 @@ import './style.css';
 
 import Fake from '../../components/partials/Fake';
 import Slide from '../../components/partials/ImageSlide';
+import AdItem from '../../components/partials/AdItem';
 
 import { useParams } from 'react-router-dom';
 
@@ -93,9 +94,18 @@ const AdPage = () => {
                                 </div>
                             </>
                         }
-
                     </div>
                 </div>
+                {/* {adInfo.others &&
+                    <>
+                        <h2>Outras ofertas do vendedor</h2>
+                        <div className="list">
+                            {adInfo.others.map((i, k) =>
+                                <AdItem key={k} data={i} />
+                            )}
+                        </div>
+                    </>
+                } */}
             </Container>
         </>
 
