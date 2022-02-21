@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import './style.css';
 
 import Fake from '../../components/partials/Fake';
+import Slide from '../../components/partials/ImageSlide';
 
 import { useParams } from 'react-router-dom';
 
@@ -27,6 +28,17 @@ const AdPage = () => {
         getAdInfo(id);
     }, []);
 
+    const formatDate = (date: string) => {
+        let cDate = new Date(date);
+
+        let months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        let cDay = cDate.getDate();
+        let cMonth = cDate.getMonth();
+        let cYear = cDate.getFullYear();
+
+        return `${cDay} de ${months[cMonth]} de ${cYear}`;
+    }
+
     return (
         <>
             <Container>
@@ -36,7 +48,7 @@ const AdPage = () => {
                             <div className="item-img">
                                 {loading && <Fake height={300} />}
                                 {adInfo.images &&
-                                    <img src={adInfo.images[0]} alt="" />
+                                    <Slide images={adInfo.images}/>
                                 }
                             </div>
                             <div className="item-info">
@@ -45,11 +57,16 @@ const AdPage = () => {
                                     {adInfo.title &&
                                         <h2>{adInfo.title}</h2>
                                     }   
+                                    {adInfo.dateCreated &&
+                                        <small>Criado em {formatDate(adInfo.dateCreated)}</small>
+                                    }
                                 </div>
                                 <div className="item-description">
                                     {loading && <Fake height={100} />}
-                                    {adInfo.description &&
-                                        <span>{adInfo.description}</span>
+                                    {adInfo.description}
+                                    <hr />
+                                    {adInfo.views &&
+                                        <small>Visualizações: {adInfo.views}</small>
                                     }
                                 </div>
                             </div>
