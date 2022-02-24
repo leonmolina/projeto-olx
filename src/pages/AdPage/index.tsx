@@ -96,16 +96,16 @@ const AdPage = () => {
                         }
                     </div>
                 </div>
-                {/* {adInfo.others &&
+                {adInfo.others &&
                     <>
                         <h2>Outras ofertas do vendedor</h2>
                         <div className="list">
-                            {adInfo.others.map((i, k) =>
+                            {adInfo.others.map((i, k)=>
                                 <AdItem key={k} data={i} />
                             )}
                         </div>
                     </>
-                } */}
+                }
             </Container>
         </>
 

@@ -17,6 +17,13 @@ type AdType = {
     id: string | undefined,
     other: boolean
 }
+type Announced = {
+    id: string,
+    image: string,
+    price: number,
+    priceNegotiable: boolean,
+    title: string
+}
 export interface State {
     _id: string;
     name: string;
@@ -44,7 +51,7 @@ export interface Ad {
     description: string;
     id: string;
     images: string[];
-    others: boolean;
+    others: Announced[];
     price: number;
     priceNegotiable: boolean;
     stateName: string;
