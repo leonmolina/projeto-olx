@@ -3,11 +3,13 @@ import qs from 'qs';
 
 // TYPES
 type BodyType = {
-    email: string,
-    password: string,
+    email?: string,
+    password?: string,
     token?: string,
     name?: string,
-    state?: string
+    state?: string,
+    id?: string,
+    other?: boolean
 }
 type AdsType = {
     sort: string,
@@ -15,7 +17,8 @@ type AdsType = {
 }
 type AdType = {
     id: string | undefined,
-    other: boolean
+    other: boolean,
+    token?: string
 }
 type Announced = {
     id: string,
@@ -97,7 +100,6 @@ const apiFetchGet = async (endpoint: string, body: BodyType) => {
             body.token = token;
         }
     }
-
     const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(body)}`);
     const json = await res.json();
 
@@ -163,7 +165,7 @@ const OlxAPI = {
         );
         return json;
     },
-    getAd: async (id: string | undefined, other: boolean) => {
+    getAd: async (id: string | undefined, other: boolean = false) => {
         const json = await apiFetchGetAd(
             '/ad/item',
             {id, other}
