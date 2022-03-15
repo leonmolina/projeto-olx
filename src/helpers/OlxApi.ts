@@ -20,13 +20,6 @@ type AdType = {
     other: boolean,
     token?: string
 }
-type Announced = {
-    id: string,
-    image: string,
-    price: number,
-    priceNegotiable: boolean,
-    title: string
-}
 export interface State {
     _id: string;
     name: string;
@@ -54,7 +47,7 @@ export interface Ad {
     description: string;
     id: string;
     images: string[];
-    others: Announced[];
+    others: Ads[];
     price: number;
     priceNegotiable: boolean;
     stateName: string;
