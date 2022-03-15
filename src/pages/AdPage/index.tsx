@@ -1,5 +1,5 @@
 // CSS AND BOOTSTRAP
-import { Container, Breadcrumb } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import './style.css';
 
 import Fake from '../../components/partials/Fake';
