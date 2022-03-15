@@ -41,7 +41,6 @@ const Home = () => {
             setAdList(json.ads);
         }
         getRecentAds();
-        console.log(adList)
     }, []);
 
     return (

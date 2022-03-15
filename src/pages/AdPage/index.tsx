@@ -1,12 +1,12 @@
 // CSS AND BOOTSTRAP
-import { Container } from 'react-bootstrap';
+import { Container, Breadcrumb } from 'react-bootstrap';
 import './style.css';
 
 import Fake from '../../components/partials/Fake';
 import Slide from '../../components/partials/ImageSlide';
 import AdItem from '../../components/partials/AdItem';
 
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import useApi, { Ad } from '../../helpers/OlxApi';
 import { useEffect, useState } from 'react';
@@ -14,14 +14,14 @@ import { useEffect, useState } from 'react';
 const AdPage = () => {
 // API CALL AND HOOK
     const api = useApi();
-    const id = useParams();
+    const { id } = useParams();
 
     const [loading, setLoading] = useState(true);
     const [adInfo, setAdInfo] = useState<Ad>(Object);
 
 
     useEffect(()=>{
-        const getAdInfo = async (id: any) => {
+        const getAdInfo = async (id: string | undefined) => {
             const json = await api.getAd(id, true);
             setAdInfo(json);
             setLoading(false);
@@ -43,6 +43,18 @@ const AdPage = () => {
     return (
         <>
             <Container>
+                {adInfo.category &&
+                    <div className='breadcrumb'>
+                        <span>Você está aqui:</span>
+                        <Link to="/">Home</Link>
+                        <span>/</span>
+                        <Link to={`/ads?state=${adInfo.stateName}`}>{adInfo.stateName}</Link>
+                        <span>/</span>
+                        <Link to={`/ads?state=${adInfo.stateName}&cat=${adInfo.category.slug}`}>{adInfo.category.name}</Link>
+                        <span>/</span>
+                        {adInfo.title}
+                    </div>
+                }
                 <div className='item-page--area'>
                     <div className="left-side">
                         <div className="box">
@@ -97,14 +109,14 @@ const AdPage = () => {
                     </div>
                 </div>
                 {adInfo.others &&
-                    <>
+                    <div className='others-area'>
                         <h2>Outras ofertas do vendedor</h2>
                         <div className="list">
                             {adInfo.others.map((i, k)=>
                                 <AdItem key={k} data={i} />
                             )}
                         </div>
-                    </>
+                    </div>
                 }
             </Container>
         </>

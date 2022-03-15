@@ -64,3 +64,26 @@
     color: #999;
     margin-top: 10px;
 }
+
+/* OTHERS */
+
+.others-area h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+.list .announced-item {
+    width: 25%;
+}
+
+/* BREADCRUMB */
+
+.breadcrumb {
+    font-size: 13px;
+    margin-top: 20px;
+}
+.breadcrumb a {
+    display: inline-block;
+    margin: 0 5px;
+    text-decoration: underline;
+    color: #000;
+}

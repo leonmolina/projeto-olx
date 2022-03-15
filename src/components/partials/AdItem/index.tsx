@@ -1,6 +1,8 @@
 import './style.css';
 import { Link } from 'react-router-dom';
 
+import noimage from './images/sem-imagem.png'
+
 type AnnouncedType = {
     data: {
         id: string,
@@ -10,6 +12,7 @@ type AnnouncedType = {
         title: string
     }
 }
+const noImage = noimage;
 
 const AdItem = (props: AnnouncedType) => {
     let price = '';
@@ -22,7 +25,7 @@ const AdItem = (props: AnnouncedType) => {
 
     let img = '';
     if(props.data.image === "http://alunos.b7web.com.br:501/media/default.jpg") {
-        img = "http://alunos.b7web.com.br:501/media/1ea1dd36-93c5-49ed-89e8-3459de5e725e.jpg"
+        img = noImage
     } else {
         img = props.data.image
     }

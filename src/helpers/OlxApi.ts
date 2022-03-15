@@ -119,7 +119,14 @@ const apiFetchGetAds = async (endpoint: string, options: AdsType) => {
     return json;
 }
 const apiFetchGetAd = async (endpoint: string, options: AdType) => {
-    const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(options.id)}`);
+    if(!options.token) {
+        let token = Cookies.get('token');
+        if(token) {
+            options.token = token;
+        }
+    }
+    console.log(options)
+    const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(options)}`);
     const json = await res.json();
     return json;
 }
