@@ -1,7 +1,7 @@
 // BOOTSTRAP
 import { Form, Button, Container } from 'react-bootstrap';
 // REACT
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 // REQUISITION AND PARTIALS
 import useApi from '../../helpers/OlxApi';
 import { doLogin } from '../../helpers/AuthHandler';
@@ -9,10 +9,15 @@ import ErrorMessage from '../../components/partials/ErrorMessage';
 
 const AddAd = () => {
 // API CALL AND USE STATES
-    const api = useApi();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [rememberPassword, setRememberPassword] = useState(false);
+
+    const fileField = useRef<HTMLInputElement>(null);
+
+    const [title, setTitle] = useState('');
+    const [category, setCategory] = useState('');
+    const [price, setPrice] = useState('');
+    const [priceNegotiable, setPriceNegotiable] = useState(false);
+    const [desc, setDesc] = useState('');
+    
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState('');
 
@@ -21,14 +26,14 @@ const AddAd = () => {
         e.preventDefault();
         setDisabled(true);
         setError('')
-        const json = await api.login(email, password);
+        // const json = await api.login(email, password);
     
-        if(json.error) {
-            setError(json.error);
-        } else {
-            doLogin(json.token, rememberPassword);
-            window.location.href = '/';
-        }
+        // if(json.error) {
+        //     setError(json.error);
+        // } else {
+        //     doLogin(json.token, rememberPassword);
+        //     window.location.href = '/';
+        // }
         setDisabled(false);
     }
 
@@ -49,42 +54,69 @@ const AddAd = () => {
                     <Form onSubmit={handleSubmit} className="forms">
                         {/* EMAIL */}
                         <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>E-mail</Form.Label>
+                            <Form.Label className='area-title'>Titulo</Form.Label>
                             <Form.Control 
-                                type="email"
+                                type="text"
                                 className='area-input'
                                 disabled={disabled}
-                                value={email}
-                                onChange={e=>setEmail(e.target.value)} 
+                                value={title}
+                                onChange={e=>setTitle(e.target.value)} 
                                 required
                             />
                         </Form.Group>
                         {/* PASSWORD */}
                         <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Senha</Form.Label>
-                            <Form.Control
-                                type="password"
-                                className='area-input'
-                                disabled={disabled}
-                                value={password}
-                                onChange={e=>setPassword(e.target.value)}
-                                required
-                            />
+                            <Form.Label className='area-title'>Categoria</Form.Label>
+                            <Form.Select className="area-input"value={category} onChange={e=>setCategory(e.target.value)} required>
+                                {/* <option key={k} value={i._id}>{i.name}</option> */}
+                            </Form.Select>
                         </Form.Group>
                         {/* CONFIRM PASSWORD */}
                         <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Lembrar Senha</Form.Label>
+                            <Form.Label className='area-title'>Preço</Form.Label>
+                            {/* <Form.Control 
+                                type="text"
+                                className='area-input'
+                                disabled={disabled}
+                                value={title}
+                                onChange={e=>setTitle(e.target.value)} 
+                                required
+                            /> */}
+                        </Form.Group>
+                        <Form.Group className="mb-1 area">
+                            <Form.Label className='area-title'>Preço Negociável</Form.Label>
                             <Form.Check
                                 type="checkbox"
                                 disabled={disabled}
-                                checked={rememberPassword}
-                                onChange={()=>setRememberPassword(!rememberPassword)}
+                                checked={priceNegotiable}
+                                onChange={()=>setPriceNegotiable(!priceNegotiable)}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-1 area">
+                            <Form.Label className='area-title'>Descrição</Form.Label>
+                            <Form.Control 
+                                as="textarea"
+                                className='area-input'
+                                disabled={disabled}
+                                value={desc}
+                                onChange={e=>setDesc(e.target.value)} 
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-1 area">
+                            <Form.Label className='area-title'>Imagens (1 ou mais)</Form.Label>
+                            <Form.Control 
+                                type="file"
+                                className='area-input'
+                                disabled={disabled}
+                                ref={fileField}
+                                multiple
                             />
                         </Form.Group>
                         {/* SUBMIT BUTTON */}
                         <Form.Group className="mb-1 area">
                             <Form.Label className='area-title'></Form.Label>
-                            <Button variant="primary" type="submit" disabled={disabled}>Fazer Login</Button>
+                            <Button variant="primary" type="submit" disabled={disabled}>Adicionar Anúncio</Button>
                         </Form.Group>
                     </Form>
                 </div>

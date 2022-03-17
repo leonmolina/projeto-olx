@@ -16,6 +16,10 @@ body {
   max-width: 500px;
   margin-bottom: 0.25rem !important;
 }
+.area textarea {
+  height: 150px;
+  resize: none;
+}
 .forms {
   background-color: #FFF;
   border-radius: 3px;
