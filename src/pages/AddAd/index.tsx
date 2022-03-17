@@ -1,16 +1,17 @@
 // BOOTSTRAP
 import { Form, Button, Container } from 'react-bootstrap';
 // REACT
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // REQUISITION AND PARTIALS
-import useApi from '../../helpers/OlxApi';
-import { doLogin } from '../../helpers/AuthHandler';
+import useApi, {Category} from '../../helpers/OlxApi';
 import ErrorMessage from '../../components/partials/ErrorMessage';
 
 const AddAd = () => {
 // API CALL AND USE STATES
-
+    const api = useApi();
     const fileField = useRef<HTMLInputElement>(null);
+
+    const [categories, setCategories] = useState<Category[]>([]);
 
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
@@ -20,6 +21,14 @@ const AddAd = () => {
     
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState('');
+
+    useEffect(()=>{
+        const getCategories = async ()=> {
+            const cats = await api.getCategories();
+            setCategories(cats);
+        }
+        getCategories();
+    }, [])
 
 // FORM SUBMIT
     const handleSubmit = async (e: React.FormEvent<EventTarget>) => {
@@ -67,21 +76,27 @@ const AddAd = () => {
                         {/* PASSWORD */}
                         <Form.Group className="mb-1 area">
                             <Form.Label className='area-title'>Categoria</Form.Label>
-                            <Form.Select className="area-input"value={category} onChange={e=>setCategory(e.target.value)} required>
-                                {/* <option key={k} value={i._id}>{i.name}</option> */}
+                            <Form.Select className="area-input" disabled={disabled} value={category} onChange={e=>setCategory(e.target.value)} required>
+                                <option></option>
+                                {categories &&
+                                    categories.map(i =>
+                                        <option key={i._id} value={i._id}>{i.name}</option>
+                                    )
+                                }
                             </Form.Select>
                         </Form.Group>
                         {/* CONFIRM PASSWORD */}
                         <Form.Group className="mb-1 area">
                             <Form.Label className='area-title'>Preço</Form.Label>
-                            {/* <Form.Control 
+                            <span className='span-currency'>R$:</span>
+                            <Form.Control 
                                 type="text"
                                 className='area-input'
-                                disabled={disabled}
-                                value={title}
-                                onChange={e=>setTitle(e.target.value)} 
+                                disabled={disabled || priceNegotiable}
+                                value={price}
+                                onChange={e=>setPrice(e.target.value)} 
                                 required
-                            /> */}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-1 area">
                             <Form.Label className='area-title'>Preço Negociável</Form.Label>

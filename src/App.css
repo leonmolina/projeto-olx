@@ -19,6 +19,11 @@ body {
 .area textarea {
   height: 150px;
   resize: none;
+  font-size: 14px;
+}
+.area .span-currency {
+  font-weight: bold;
+  margin-right: 5px;
 }
 .forms {
   background-color: #FFF;
