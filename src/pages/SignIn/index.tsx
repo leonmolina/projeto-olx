@@ -78,7 +78,7 @@ const SignIn = () => {
                                 type="checkbox"
                                 disabled={disabled}
                                 checked={rememberPassword}
-                                onClick={()=>setRememberPassword(!rememberPassword)}
+                                onChange={()=>setRememberPassword(!rememberPassword)}
                             />
                         </Form.Group>
                         {/* SUBMIT BUTTON */}
