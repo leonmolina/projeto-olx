@@ -9,16 +9,12 @@ type BodyType = {
     name?: string,
     state?: string,
     id?: string,
-    other?: boolean
+    other?: boolean,
+    options?: State | Category | AdsType
 }
 type AdsType = {
     sort: string,
     limit: number
-}
-type AdType = {
-    id: string | undefined,
-    other: boolean,
-    token?: string
 }
 export interface State {
     _id: string;
@@ -103,30 +99,8 @@ const apiFetchGet = async (endpoint: string, body: BodyType) => {
 
     return json;
 }
-const apiFetchGetStates = async (endpoint: string) => {
+const apiFetchGetStatesAndCategories = async (endpoint: string) => {
     const res = await fetch(`${BASEAPI+endpoint}`);
-    const json = await res.json();
-    return json;
-}
-const apiFetchGetCategories = async (endpoint: string) => {
-    const res = await fetch(`${BASEAPI+endpoint}`);
-    const json = await res.json();
-    return json;
-}
-const apiFetchGetAds = async (endpoint: string, options: AdsType) => {
-    const res = await fetch(`${BASEAPI+endpoint}`);
-    const json = await res.json();
-    return json;
-}
-const apiFetchGetAd = async (endpoint: string, options: AdType) => {
-    if(!options.token) {
-        let token = Cookies.get('token');
-        if(token) {
-            options.token = token;
-        }
-    }
-    console.log(options)
-    const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(options)}`);
     const json = await res.json();
     return json;
 }
@@ -147,26 +121,26 @@ const OlxAPI = {
         return json;
     },
     getStates: async () => {
-        const json = await apiFetchGetStates(
+        const json = await apiFetchGetStatesAndCategories(
             '/states'
         );
         return json.states;
     },
     getCategories: async () => {
-        const json = await apiFetchGetCategories(
+        const json = await apiFetchGetStatesAndCategories(
             '/categories'
         );
         return json.categories;
     },
     getAds: async (options: AdsType) => {
-        const json = await apiFetchGetAds(
+        const json = await apiFetchGet(
             '/ad/list',
-            options
+            {options}
         );
         return json;
     },
     getAd: async (id: string | undefined, other: boolean = false) => {
-        const json = await apiFetchGetAd(
+        const json = await apiFetchGet(
             '/ad/item',
             {id, other}
         );
