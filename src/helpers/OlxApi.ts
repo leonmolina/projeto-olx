@@ -16,6 +16,14 @@ type AdsType = {
     sort: string,
     limit: number
 }
+type PostType = {
+    title: string,
+    price: string,
+    priceneg: boolean,
+    desc: string,
+    cat: string,
+    img: [string]
+}
 export interface State {
     _id: string;
     name: string;
@@ -57,6 +65,25 @@ export interface Ad {
 // BASE URL
 const BASEAPI = 'http://alunos.b7web.com.br:501'
 // FETCH
+
+const apiFetchFile = async (endpoint: string, body: any) => {
+    if(!body.token) {
+        let token = Cookies.get('token');
+        if(token) {
+            body.append('token', token);
+        }
+    }
+    const res = await fetch(BASEAPI+endpoint, {
+        method: 'POST',
+        body
+    });
+    const json = await res.json();
+    if(json.notallowed) {
+        window.location.href = '/signin';
+        return;
+    }
+    return json;
+}
 const apiFetchPost = async (endpoint: string, body: BodyType) => {
     if(!body.token) {
         let token = Cookies.get('token');
@@ -143,6 +170,13 @@ const OlxAPI = {
         const json = await apiFetchGet(
             '/ad/item',
             {id, other}
+        );
+        return json;
+    },
+    addAd: async (fData: any) => {
+        const json = await apiFetchFile(
+            '/ad/add',
+            fData
         );
         return json;
     }

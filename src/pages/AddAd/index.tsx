@@ -5,11 +5,13 @@ import React, { useEffect, useRef, useState } from 'react';
 // REQUISITION AND PARTIALS
 import useApi, {Category} from '../../helpers/OlxApi';
 import ErrorMessage from '../../components/partials/ErrorMessage';
+import { useNavigate } from 'react-router-dom';
 
 const AddAd = () => {
 // API CALL AND USE STATES
     const api = useApi();
-    const fileField = useRef<HTMLInputElement>(null);
+    const fileField = useRef<HTMLInputElement | any>(null);
+    const navigate = useNavigate();
 
     const [categories, setCategories] = useState<Category[]>([]);
 
@@ -35,14 +37,40 @@ const AddAd = () => {
         e.preventDefault();
         setDisabled(true);
         setError('')
-        // const json = await api.login(email, password);
-    
-        // if(json.error) {
-        //     setError(json.error);
-        // } else {
-        //     doLogin(json.token, rememberPassword);
-        //     window.location.href = '/';
-        // }
+        let errors = [];
+
+        if(!title.trim()) {
+            errors.push('Sem título');
+        }
+        if(!category) {
+            errors.push('Sem categoria')
+        }
+        if(errors.length === 0) {
+            const fData = new FormData();
+            fData.append('title', title);
+            fData.append('price', price);
+            fData.append('priceneg', priceNegotiable.toString());
+            fData.append('desc', desc);
+            fData.append('cat', category);
+
+            if(fileField.current?.files?.length > 0) {
+                for(let i=0; i<fileField.current?.files?.length; i++) {
+                    fData.append('img', fileField.current.files[i]);
+                }
+            }
+
+            const json = await api.addAd(fData);
+
+            if(!json.error) {
+                navigate(`/ad/${json.id}`);
+                return;
+            } else {
+                setError(json.error)
+            }
+
+        } else {
+            setError(errors.join("\n"));
+        }
         setDisabled(false);
     }
 
