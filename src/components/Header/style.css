@@ -17,6 +17,7 @@ header a, .logout-button {
 }
 .navlink {
     color: #000;
+    text-decoration: none;
 }
 .navlink:hover,
 .logout-button:hover {
