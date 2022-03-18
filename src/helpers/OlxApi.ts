@@ -133,6 +133,15 @@ const apiFetchGetStatesAndCategories = async (endpoint: string) => {
 }
 
 const OlxAPI = {
+    // FILE POST
+    addAd: async (fData: any) => {
+        const json = await apiFetchFile(
+            '/ad/add',
+            fData
+        );
+        return json;
+    },
+    // POST
     login: async (email: string, password: string) => {
         const json = await apiFetchPost(
             '/user/signin',
@@ -147,6 +156,7 @@ const OlxAPI = {
         );
         return json;
     },
+    // GET STATES AND CATEGORIES
     getStates: async () => {
         const json = await apiFetchGetStatesAndCategories(
             '/states'
@@ -159,6 +169,7 @@ const OlxAPI = {
         );
         return json.categories;
     },
+    // GET
     getAds: async (options: AdsType) => {
         const json = await apiFetchGet(
             '/ad/list',
@@ -170,13 +181,6 @@ const OlxAPI = {
         const json = await apiFetchGet(
             '/ad/item',
             {id, other}
-        );
-        return json;
-    },
-    addAd: async (fData: any) => {
-        const json = await apiFetchFile(
-            '/ad/add',
-            fData
         );
         return json;
     }
