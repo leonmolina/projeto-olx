@@ -1,12 +1,12 @@
 // CSS AND BOOTSTRAP
-import './style.css';
-import { Container, Form, Button } from 'react-bootstrap';
 // REACT
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-// REQUISITION AND PARTIALS
-import useApi, {State, Category, Ads}  from '../../helpers/OlxApi';
 import AdItem from '../../components/partials/AdItem';
+// REQUISITION AND PARTIALS
+import useApi, { AdsInterface, Category, State } from '../../helpers/OlxApi';
+import './style.css';
 
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
     const api = useApi();
     const [stateList, setStateList] = useState<State[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
-    const [adList, setAdList] = useState<Ads[]>([]);
+    const [adList, setAdList] = useState<AdsInterface[]>([]);
 // STATES - USE EFFECT
     useEffect(()=>{
         const getStates = async () => {

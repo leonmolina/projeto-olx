@@ -34,7 +34,7 @@ export interface Category {
     slug: string;
     _id: string;
 }
-export interface Ads {
+export interface AdsInterface {
     id: string;
     image: string;
     price: number;
@@ -51,7 +51,7 @@ export interface Ad {
     description: string;
     id: string;
     images: string[];
-    others: Ads[];
+    others: AdsInterface[];
     price: number;
     priceNegotiable: boolean;
     stateName: string;

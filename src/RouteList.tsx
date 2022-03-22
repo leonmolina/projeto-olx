@@ -1,14 +1,15 @@
-import { useRoutes, Navigate } from "react-router-dom";
-
-import NotFound from "./pages/NotFound";
-import Home from "./pages/Home";
+import { Navigate, useRoutes } from "react-router-dom";
+import { isLogged } from './helpers/AuthHandler';
 import About from "./pages/About";
+import AddAd from "./pages/AddAd";
+import AdPage from "./pages/AdPage";
+import Ads from "./pages/Ads";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import AdPage from "./pages/AdPage";
-import AddAd from "./pages/AddAd";
 
-import { isLogged } from './helpers/AuthHandler';
+
 
 export const RouteList = () => {
     let logged = isLogged();
@@ -19,6 +20,7 @@ export const RouteList = () => {
         { path: '/signin', element: <SignIn />},
         { path: '/signup', element: <SignUp />},
         { path: '/ad/:id', element: <AdPage />},
+        { path: '/ads', element: <Ads />},
         { path: '/post-an-ad', element: logged ? <AddAd /> : <Navigate to="/signin" />}
     ]);
 }

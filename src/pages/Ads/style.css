@@ -1,0 +1,15 @@
+/* LIST */
+.ad-page--area {
+    display: flex;
+    margin-top: 20px;
+}
+.ad-page--leftSide {
+    width: 250px;
+    margin-right: 10px;
+}
+.ad-page--rightSide {
+    flex: 1;
+}
+.categoryItem {
+    list-style: none;
+}
