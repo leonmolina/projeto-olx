@@ -1,9 +1,9 @@
-import { Link, NavLink } from 'react-router-dom';
-import './style.css';
-import logo from './images/logo-lm.png'
-
-import { isLogged, doLogout } from '../../helpers/AuthHandler';
 import { Container, Nav, Navbar, NavbarBrand } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
+import { doLogout, isLogged } from '../../helpers/AuthHandler';
+import logo from './images/logo-lm.png';
+import './style.css';
+
 
 const Header = () => {
     let logged = isLogged();
@@ -26,7 +26,7 @@ const Header = () => {
                         <>
                             <NavLink to="/account" className='mx-3 navlink'>Minha Conta</NavLink>
                             <button className='logout-button' onClick={handleLogout}>Sair</button>
-                            <NavLink to="/new-post" className="btn nav-button mx-3">Poste um anúncio</NavLink>
+                            <NavLink to="/post-an-ad" className="btn nav-button mx-3">Poste um anúncio</NavLink>
                         </>
                     }
                     {!logged &&
