@@ -14,7 +14,10 @@ type BodyType = {
 }
 type AdsType = {
     sort: string,
-    limit: number
+    limit: number,
+    q?: any,
+    cat?: any,
+    state?: any
 }
 type PostType = {
     title: string,
@@ -173,7 +176,7 @@ const OlxAPI = {
     getAds: async (options: AdsType) => {
         const json = await apiFetchGet(
             '/ad/list',
-            {options}
+            options
         );
         return json;
     },
