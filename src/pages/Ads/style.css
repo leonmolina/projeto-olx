@@ -50,3 +50,9 @@
 .ad-page--rightSide {
     flex: 1;
 }
+/* PAGINATION */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Pagination } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AdItem from '../../components/partials/AdItem';
 import useApi, { AdsInterface, Category, State } from '../../helpers/OlxApi';
@@ -33,26 +33,37 @@ const Ads = () => {
     const [state, setState] = useState(auxVerifyQuery('state'));
     const [resultOpacity, setResultOpacity] = useState(1);
 // USE STATES
+    const [adsTotal, setAdsTotal] = useState(0);
     const [stateList, setStateList] = useState<State[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const [adList, setAdList] = useState<AdsInterface[]>([]);
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 // LOADING
     const [loading, setLoading] = useState(true);
 
 // GETS ADLIST BASED ON QUERY PARAMETERS
+    const MAX_ADS_ON_PAGE = 9;
     const getAdsList = async () => {
         setLoading(true);
+        let offset = (currentPage - 1) * MAX_ADS_ON_PAGE;
         const json = await api.getAds({
             sort:'desc',
-            limit:8,
-            q,
-            cat,
-            state
+            limit:MAX_ADS_ON_PAGE,
+            q, cat, state,
+            offset
         });
         setAdList(json.ads);
+        setAdsTotal(json.total);
         setResultOpacity(1);
         setLoading(false);
     }
+
+    useEffect(()=>{
+        setResultOpacity(0.3);
+        getAdsList();
+    }, [currentPage])
+
 
 // STATES - USE EFFECT
     useEffect(()=>{
@@ -80,8 +91,9 @@ const Ads = () => {
         if(timer) {
             clearTimeout(timer);
         }
-        timer = setTimeout(getAdsList, 2000);
+        timer = setTimeout(getAdsList, 1000);
         setResultOpacity(0.3);
+        setCurrentPage(1);
     },[q, cat, state])
 
 // CATEGORIES - USE EFFECT
@@ -92,6 +104,40 @@ const Ads = () => {
         }
         getCategories();
     }, []);
+
+// PAGINATION USE EFFECTS
+    useEffect(() =>{
+        if(adList.length > 0) {
+            setPageCount(Math.ceil(adsTotal/adList.length));
+        } else {
+            setPageCount(0);
+        }
+        
+    }, [adsTotal]);
+
+// HANDLES PAGINATION ARRAY
+    let pagination = [];
+    for (let i=0; i<=pageCount; i++) {
+        pagination.push(i);
+    }
+    const handlePaginationNext = () => {
+        if (currentPage === pagination.length) {
+            setCurrentPage(currentPage)
+        } else {
+            let page = currentPage;
+            page++;
+            setCurrentPage(page);
+        }
+    }
+    const handlePaginationPrev = () => {
+        if (currentPage === 1) {
+            setCurrentPage(currentPage)
+        } else {
+            let page = currentPage;
+            page--;
+            setCurrentPage(page);
+        }
+    }
 
     return (
         <Container>
@@ -129,7 +175,7 @@ const Ads = () => {
                 </div>
                 <div className="ad-page--rightSide">
                     <h2>Resultados</h2>
-                    {loading &&
+                    {loading && adList.length === 0 &&
                         <div className="list-warning">Carregando...</div>
                     }
                     {!loading && adList.length == 0 &&
@@ -141,6 +187,27 @@ const Ads = () => {
                             <AdItem key={k} data={i} />
                         )}
                     </div>
+
+                    <Pagination>
+                        <Pagination.First />
+                        <Pagination.Prev onClick={handlePaginationPrev} />
+                        {pagination.slice(1, 4).map((i,k)=>
+                            <Pagination.Item
+                                onClick={()=>setCurrentPage(i)}
+                                key={k}
+                                className={i === currentPage ? 'active' : ''}
+                            >
+                                {i}
+                            </Pagination.Item>
+                        )}
+                        {
+                            currentPage > 3 &&
+                            <Pagination.Item active>{currentPage}</Pagination.Item>
+                        }
+                        <Pagination.Next onClick={handlePaginationNext} />
+                        <Pagination.Last />
+                    </Pagination>
+
                 </div>
             </div>
         </Container>

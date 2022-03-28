@@ -17,7 +17,8 @@ type AdsType = {
     limit: number,
     q?: any,
     cat?: any,
-    state?: any
+    state?: any,
+    offset?: any
 }
 type PostType = {
     title: string,
