@@ -1,5 +1,4 @@
 header {
-    background-color: #FFF;
     border-bottom: 1px solid #CCC;
 }
 header a, .logout-button {
@@ -11,6 +10,7 @@ header a, .logout-button {
 }
 .navbar {
     height: 60px;
+    background-color: #FFF;
 }
 .logo-lm {
     max-height: 50px;

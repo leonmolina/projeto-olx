@@ -1,10 +1,11 @@
+import './style.css';
 const Footer = () => {
 
     return (    
-    <>
-        <hr />
-        <h6>Footer</h6>
-    </>
+    <div className="footer-area">
+        <span>Todos os direitos reservados</span>
+        <span>OLX Clone B7Web</span>
+    </div>
     );
 }
 

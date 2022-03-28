@@ -1,0 +1,14 @@
+.footer-area {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #CCC;
+}
+.footer-area span {
+    font-size: 14px;
+    color: #999;
+}
