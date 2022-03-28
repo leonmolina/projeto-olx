@@ -15,7 +15,7 @@ const Ads = () => {
 
 // HANDLES QUERY SEARCH AND FILLS THE STATE VARIABLE
     const useQueryString = () => {
-        return new URLSearchParams( useLocation().search );
+        return new URLSearchParams(useLocation().search);
     }
     const query = useQueryString();
     // CHECKS IF THE QUERY IS NULL, AND IF NOT, IT SEARCHES DEPENDING ON THE PARAMETERS
@@ -117,7 +117,7 @@ const Ads = () => {
 
 // HANDLES PAGINATION ARRAY
     let pagination = [];
-    for (let i=0; i<=pageCount; i++) {
+    for (let i=1; i<=pageCount; i++) {
         pagination.push(i);
     }
     const handlePaginationNext = () => {
@@ -191,7 +191,7 @@ const Ads = () => {
                     <Pagination>
                         <Pagination.First />
                         <Pagination.Prev onClick={handlePaginationPrev} />
-                        {pagination.slice(1, 4).map((i,k)=>
+                        {pagination.slice(0, 3).map((i,k)=>
                             <Pagination.Item
                                 onClick={()=>setCurrentPage(i)}
                                 key={k}
@@ -200,6 +200,7 @@ const Ads = () => {
                                 {i}
                             </Pagination.Item>
                         )}
+                        <Pagination.Ellipsis />
                         {
                             currentPage > 3 &&
                             <Pagination.Item active>{currentPage}</Pagination.Item>
