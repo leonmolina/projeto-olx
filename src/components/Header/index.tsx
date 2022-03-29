@@ -26,7 +26,7 @@ const Header = () => {
                         <>
                             <NavLink to="/account" className='mx-3 navlink'>Minha Conta</NavLink>
                             <button className='logout-button' onClick={handleLogout}>Sair</button>
-                            <NavLink to="/post-an-ad" className="btn nav-button mx-3">Poste um anúncio</NavLink>
+                            <NavLink to="/post-ad" className="btn nav-button mx-3">Poste um anúncio</NavLink>
                         </>
                     }
                     {!logged &&
