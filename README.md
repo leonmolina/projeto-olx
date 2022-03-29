@@ -1,11 +1,11 @@
-**# Project**
+# Project
 
 The original project is from B7Web's React course. I'm adapting it to Typescript and Bootstrap
 
-**### Installing**
+### Installing
 
 `npm install`
 
-**### Running the project**
+### Running the project
 
 `npm start`
