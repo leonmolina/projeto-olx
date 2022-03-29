@@ -135,6 +135,31 @@ const apiFetchGetStatesAndCategories = async (endpoint: string) => {
     const json = await res.json();
     return json;
 }
+const apiFetchPut = async (endpoint: string, body: BodyType) => {
+    if(!body.token) {
+        let token = Cookies.get('token');
+        if(token) {
+            body.token = token;
+        }
+    }
+
+    const res = await fetch(BASEAPI+endpoint, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(body)
+    });
+    const json = await res.json();
+
+    if(json.notallowed) {
+        window.location.href = '/signin';
+        return;
+    }
+
+    return json;
+}
 
 const OlxAPI = {
     // FILE POST
@@ -146,6 +171,13 @@ const OlxAPI = {
         return json;
     },
     // POST
+    updateAd: async (body: any) => {
+        const json = await apiFetchPost(
+            `/ad/${body.id}`,
+            body
+        );
+        return json;
+    },
     login: async (email: string, password: string) => {
         const json = await apiFetchPost(
             '/user/signin',
@@ -157,6 +189,14 @@ const OlxAPI = {
         const json = await apiFetchPost(
             '/user/signup',
             {name, email, password, state:stateLoc}
+        );
+        return json;
+    },
+    // PUT
+    updateAccount: async (body: any) => {
+        const json = await apiFetchPut(
+            '/user/me',
+            body
         );
         return json;
     },
@@ -185,6 +225,13 @@ const OlxAPI = {
         const json = await apiFetchGet(
             '/ad/item',
             {id, other}
+        );
+        return json;
+    },
+    getUser: async (options: any) => {
+        const json = await apiFetchGet(
+            '/user/me',
+            options
         );
         return json;
     }
