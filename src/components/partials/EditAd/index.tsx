@@ -32,14 +32,17 @@ const EditAd = (props: AnnouncedType) => {
     const handleClick = () => {
         window.location.href = `/ad/${props.data.id}`;
     }
-    // FORM SUBMIT
-    const handleSubmit = async (e: React.FormEvent<EventTarget>) => {
-        
-    }
     // MODAL AND USER INFO FUNCTIONS
-    const handleModal = () => {
-        isOpen ? setIsOpen(false) : setIsOpen(true);
+    const showModal = (props: any) => {
+        setIsOpen(true)
+        setItemId(props)
     }
+
+    const hideModal = () => {
+        setDisabled(false);
+        setIsOpen(false)
+    }
+    // FORM SUBMIT
     const handleAdNewInfo = async (e: React.FormEvent<EventTarget>) => {
         e.preventDefault();
         setDisabled(true);
@@ -52,29 +55,29 @@ const EditAd = (props: AnnouncedType) => {
         if(!newCategory) {
             errors.push('Sem categoria')
         }
-        if(errors.length === 0) {
-            const fData = new FormData();
-            fData.append('title', newTitle);
-            fData.append('price', newPrice);
-            fData.append('priceneg', priceNegotiable.toString());
-            fData.append('desc', newDesc);
-            fData.append('cat', newCategory);
+        const fData = new FormData();
+        fData.append('title', newTitle);
+        fData.append('price', newPrice);
+        fData.append('priceneg', priceNegotiable.toString());
+        fData.append('desc', newDesc);
+        fData.append('cat', newCategory);
 
-            if(fileField.current?.files?.length > 0) {
-                for(let i=0; i<fileField.current?.files?.length; i++) {
-                    fData.append('img', fileField.current.files[i]);
-                }
-            }
-            const json = await api.updateAd(fData, itemId);
-
-            if (!json.error) {
-                window.location.href = `/ad/${itemId}`;
-                return;
-    
-            } else {
-                setError(json.error);
+        if(fileField.current.files.length > 0) {
+            for(let i=0; i<fileField.current.files.length; i++) {
+                fData.append('img', fileField.current.files[i]);
             }
         }
+        const json = await api.updateAd(fData, itemId);
+
+        if (!json.error) {
+            window.location.href = `/ad/${itemId}`;
+            return;
+
+        } else {
+            setError(json.error);
+        }
+        setIsOpen(false);
+        setDisabled(false);
     }
     return (
         <div className='announced-item'>
@@ -98,7 +101,10 @@ const EditAd = (props: AnnouncedType) => {
                     {props.data.price}
                 </div>
             </Link>
-            <Modal show={isOpen} onHide={handleModal}>
+            <div>
+                <button onClick={() => showModal(props.data.id)} type="button" className="btn btn-primary">Editar</button>
+            </div>
+            <Modal show={isOpen} onHide={hideModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Altere suas informações</Modal.Title>
                 </Modal.Header>
@@ -168,7 +174,7 @@ const EditAd = (props: AnnouncedType) => {
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="danger" type="button" onClick={handleModal}>Cancelar</Button>
+                        <Button variant="danger" type="button" onClick={hideModal}>Cancelar</Button>
                         <Button variant="success" type="submit">Salvar</Button>
                     </Modal.Footer>
                 </Form>

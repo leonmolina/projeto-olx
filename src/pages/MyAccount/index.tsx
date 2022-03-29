@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Container, Form, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import AdItem from '../../components/partials/AdItem';
+import EditAd from '../../components/partials/EditAd';
 // REQUISITION AND PARTIALS
 import useApi, { Category, State, UserType } from '../../helpers/OlxApi';
 import './style.css';
@@ -151,7 +151,7 @@ const MyAccount = () => {
                 <h2>Meus anúncios</h2>
                 <div className="list">
                     {adList.map((i, k)=>
-                        <AdItem key={k} data={i}/>
+                        <EditAd key={k} data={i}/>
                     )}
                 </div>
                 <Link to="/ads" className='see-all-link'>Ver Todos</Link>
