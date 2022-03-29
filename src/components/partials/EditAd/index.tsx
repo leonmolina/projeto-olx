@@ -101,12 +101,12 @@ const EditAd = (props: AnnouncedType) => {
                     {props.data.price}
                 </div>
             </Link>
-            <div>
+            <div className="align-self-center my-2 container-fluid">
                 <button onClick={() => showModal(props.data.id)} type="button" className="btn btn-primary">Editar</button>
             </div>
             <Modal show={isOpen} onHide={hideModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Altere suas informações</Modal.Title>
+                    <Modal.Title>Altere as informações do anúncio</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handleAdNewInfo}>
                     <Modal.Body>
@@ -119,6 +119,7 @@ const EditAd = (props: AnnouncedType) => {
                                 disabled={disabled}
                                 onChange={e=>setNewTitle(e.target.value)}
                             />
+                            <span>Título atual: {props.data.title}</span>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Alterar a Categoria</Form.Label>
@@ -127,11 +128,11 @@ const EditAd = (props: AnnouncedType) => {
                                 disabled={disabled}
                                 onChange={e=>setNewCategory(e.target.value)}
                             >
-                                <option></option>
                                 {categories.map((i, k) =>
                                     <option key={k} value={i._id}>{i.name}</option>
                                 )}
                             </Form.Select>
+                            <span>Categoria atual: {props.data.category}</span>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Alterar o Preço</Form.Label>
@@ -139,9 +140,10 @@ const EditAd = (props: AnnouncedType) => {
                                 type="text"
                                 placeholder="R$ "
                                 value={newPrice}
-                                disabled={disabled}
+                                disabled={disabled || priceNegotiable}
                                 onChange={e=>setNewPrice(e.target.value)}
                             />
+                            <span>Preço atual: {props.data.price}</span>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label className='area-title'>Preço Negociável</Form.Label>
@@ -171,6 +173,9 @@ const EditAd = (props: AnnouncedType) => {
                                 ref={fileField}
                                 multiple
                             />
+                            {props.data.images &&
+                                <span>Quantidade de imaegns que o anúncio já possui: {props.data.images.length}</span>
+                            }
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>

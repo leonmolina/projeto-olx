@@ -15,6 +15,7 @@ type AnnouncedImage = {
 export type AnnouncedType = {
     data: {
         id: string,
+        category?: string,
         image: string,
         images?: AnnouncedImage[],
         price: number,
