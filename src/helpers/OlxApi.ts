@@ -20,14 +20,6 @@ type AdsType = {
     state?: any,
     offset?: any
 }
-type PostType = {
-    title: string,
-    price: string,
-    priceneg: boolean,
-    desc: string,
-    cat: string,
-    img: [string]
-}
 export interface State {
     _id: string;
     name: string;
@@ -114,6 +106,23 @@ const apiFetchPost = async (endpoint: string, body: BodyType) => {
     return json;
 }
 const apiFetchGet = async (endpoint: string, body: BodyType) => {
+    if(!body.token) {
+        let token = Cookies.get('token');
+        if(token) {
+            body.token = token;
+        }
+    }
+    const res = await fetch(`${BASEAPI+endpoint}?${qs.stringify(body)}`);
+    const json = await res.json();
+
+    if(json.notallowed) {
+        window.location.href = '/signin';
+        return;
+    }
+
+    return json;
+}
+const apiFetchGetUser = async (endpoint: string, body: any = []) => {
     if(!body.token) {
         let token = Cookies.get('token');
         if(token) {
@@ -228,10 +237,9 @@ const OlxAPI = {
         );
         return json;
     },
-    getUser: async (options: any) => {
-        const json = await apiFetchGet(
-            '/user/me',
-            options
+    getUser: async () => {
+        const json = await apiFetchGetUser(
+            '/user/me'
         );
         return json;
     }

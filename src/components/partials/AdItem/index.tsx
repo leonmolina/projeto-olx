@@ -1,12 +1,17 @@
-import './style.css';
 import { Link } from 'react-router-dom';
+import noimage from './images/sem-imagem.png';
+import './style.css';
 
-import noimage from './images/sem-imagem.png'
 
+type AnnouncedImage = {
+    url: string,
+    default: boolean
+}
 type AnnouncedType = {
     data: {
         id: string,
         image: string,
+        images?: AnnouncedImage[],
         price: number,
         priceNegotiable: boolean,
         title: string
@@ -22,6 +27,7 @@ const AdItem = (props: AnnouncedType) => {
     } else {
         price = `R$ ${props.data.price}`;
     }
+    
 
     let img = '';
     if(props.data.image === "http://alunos.b7web.com.br:501/media/default.jpg") {
@@ -34,7 +40,16 @@ const AdItem = (props: AnnouncedType) => {
         <div className='announced-item'>
             <Link to={`/ad/${props.data.id}`}>
                 <div className="item-image">
-                    <img src={img} alt="Imagem do produto anunciado" />
+                    {props.data.images &&
+                        <img
+                        // SHOWS ONLY THE FIRST IMAGE OF THE PRODUCT ON MY-ACCOUNT PAGE
+                        src={`http://alunos.b7web.com.br:501/media/${props.data.images[0].url}`}
+                        alt="Primeira imagem do produto anunciado"
+                        />
+                    }
+                    {!props.data.images &&
+                        <img src={img} alt="Imagem do produto anunciado" />
+                    }
                 </div>
                 <div className="item-name">
                     {props.data.title}

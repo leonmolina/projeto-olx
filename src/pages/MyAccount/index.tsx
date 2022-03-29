@@ -1,11 +1,10 @@
-// CSS AND BOOTSTRAP
 // REACT
 import { useEffect, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AdItem from '../../components/partials/AdItem';
 // REQUISITION AND PARTIALS
-import useApi, { AdsInterface, Category, State } from '../../helpers/OlxApi';
+import useApi, { Category, State } from '../../helpers/OlxApi';
 import './style.css';
 
 
@@ -14,7 +13,9 @@ const MyAccount = () => {
     const api = useApi();
     const [stateList, setStateList] = useState<State[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
-    const [adList, setAdList] = useState<AdsInterface[]>([]);
+// USER INFO
+    const [adList, setAdList] = useState([]);
+    const [userInfo, setUserInfo] = useState({});
 // STATES - USE EFFECT
     useEffect(()=>{
         const getStates = async () => {
@@ -23,6 +24,15 @@ const MyAccount = () => {
         }
         getStates();
     }, []);
+    // USER - USE EFFECT
+    useEffect(()=>{
+        const getUser = async () => {
+            const json = await api.getUser();
+            setUserInfo(json);
+            setAdList(json.ads)
+        }
+        getUser();
+    }, []);
 // CATEGORIES - USE EFFECT
     useEffect(()=>{
         const getCategories = async () => {
@@ -30,17 +40,6 @@ const MyAccount = () => {
             setCategories(cats);
         }
         getCategories();
-    }, []);
-// ADS - USE EFFECT
-    useEffect(()=>{
-        const getRecentAds = async () => {
-            const json = await api.getAds({
-                sort:'desc',
-                limit:8
-            });
-            setAdList(json.ads);
-        }
-        getRecentAds();
     }, []);
 
     return (
