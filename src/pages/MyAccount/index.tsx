@@ -16,15 +16,7 @@ const MyAccount = () => {
 // USER INFO
     const [adList, setAdList] = useState([]);
     const [userInfo, setUserInfo] = useState({});
-// STATES - USE EFFECT
-    useEffect(()=>{
-        const getStates = async () => {
-            const slist = await api.getStates();
-            setStateList(slist);
-        }
-        getStates();
-    }, []);
-    // USER - USE EFFECT
+// USER - USE EFFECT
     useEffect(()=>{
         const getUser = async () => {
             const json = await api.getUser();
@@ -33,7 +25,15 @@ const MyAccount = () => {
         }
         getUser();
     }, []);
-// CATEGORIES - USE EFFECT
+// STATES - USE EFFECT
+    useEffect(()=>{
+        const getStates = async () => {
+            const slist = await api.getStates();
+            setStateList(slist);
+        }
+        getStates();
+    }, []);
+    // CATEGORIES - USE EFFECT
     useEffect(()=>{
         const getCategories = async () => {
             const cats = await api.getCategories();
