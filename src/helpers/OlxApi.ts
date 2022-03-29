@@ -2,9 +2,30 @@ import Cookies from "js-cookie";
 import qs from 'qs';
 
 // TYPES
+export type UserType = {
+    name: string,
+    email: string,
+    state: string,
+    ads: AnnouncedType[]
+}
+type AnnouncedImage = {
+    url: string,
+    default: boolean
+}
+export type AnnouncedType = {
+    data: {
+        id: string,
+        image: string,
+        images?: AnnouncedImage[],
+        price: number,
+        priceNegotiable: boolean,
+        title: string
+    }
+}
 type BodyType = {
     email?: string,
     password?: string,
+    confirmPassword?: string,
     token?: string,
     name?: string,
     state?: string,
@@ -19,6 +40,17 @@ type AdsType = {
     cat?: any,
     state?: any,
     offset?: any
+}
+export interface EditAd {
+    id: string;
+    status: boolean;
+    title: string;
+    category: string;
+    price: number;
+    priceNegotiable: boolean;
+    description: string;
+    images: string[];
+    img: string[];
 }
 export interface State {
     _id: string;
@@ -180,10 +212,10 @@ const OlxAPI = {
         return json;
     },
     // POST
-    updateAd: async (body: any) => {
-        const json = await apiFetchPost(
-            `/ad/${body.id}`,
-            body
+    updateAd: async (fData: any, itemId: string) => {
+        const json = await apiFetchFile(
+            `/ad/${itemId}`,
+            fData
         );
         return json;
     },
@@ -202,10 +234,10 @@ const OlxAPI = {
         return json;
     },
     // PUT
-    updateAccount: async (body: any) => {
+    updateUser: async (name: string, email: string, password: string, state: string) => {
         const json = await apiFetchPut(
             '/user/me',
-            body
+            {name, email, password, state}
         );
         return json;
     },

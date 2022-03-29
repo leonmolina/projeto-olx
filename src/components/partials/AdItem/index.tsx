@@ -1,22 +1,8 @@
 import { Link } from 'react-router-dom';
+import { AnnouncedType } from '../../../helpers/OlxApi';
 import noimage from './images/sem-imagem.png';
 import './style.css';
 
-
-type AnnouncedImage = {
-    url: string,
-    default: boolean
-}
-type AnnouncedType = {
-    data: {
-        id: string,
-        image: string,
-        images?: AnnouncedImage[],
-        price: number,
-        priceNegotiable: boolean,
-        title: string
-    }
-}
 const noImage = noimage;
 
 const AdItem = (props: AnnouncedType) => {
