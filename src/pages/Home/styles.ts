@@ -36,7 +36,7 @@ export const SearchInput = styled(Form.Control)`
     outline: 0;
     font-size: 15px;
     color: var(--text);
-    .search-input--text {
+    &.search-input--text {
         width: 100%;
         padding: 0 10px;
     }

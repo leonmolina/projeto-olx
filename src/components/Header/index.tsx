@@ -1,9 +1,6 @@
-import { Container, Nav, Navbar, NavbarBrand } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/images/logo-lm.png';
 import { doLogout, isLogged } from '../../helpers/AuthHandler';
-import './style.css';
-
+import * as Styled from './styles';
 
 const Header = () => {
     let logged = isLogged();
@@ -14,32 +11,33 @@ const Header = () => {
     }
 
     return (
-        <Navbar>
-            <Container className='navbar'>
-                <NavbarBrand className='m-0 p-0'>
-                    <Link to="/">
-                        <img src={logo} className='logo-lm' alt='Logo da LM'/>
-                    </Link>
-                </NavbarBrand>
-                <Nav className='d-flex justify-content-evenly align-items-center'>
-                    {logged &&
-                        <>
-                            <NavLink to="/account" className='mx-3 navlink'>Minha Conta</NavLink>
-                            <button className='logout-button' onClick={handleLogout}>Sair</button>
-                            <NavLink to="/post-ad" className="btn nav-button mx-3">Poste um anúncio</NavLink>
-                        </>
-                    }
-                    {!logged &&
-                        <>
-                            <NavLink to="/signin" className='mx-3 navlink'>Login</NavLink>
-                            <NavLink to="/signup" className='mx-3 navlink'>Cadastrar</NavLink>
-                            <NavLink to="/signin" className="btn nav-button mx-3">Poste um anúncio</NavLink>
-                        </>
-                    }
-
-                </Nav>
-            </Container>
-        </Navbar>
+        <Styled.Header>
+            <Styled.NavBar>
+                <Styled.Wrapper>
+                    <Styled.NavBarBrand className='m-0 p-0'>
+                        <Styled.Links to="/">
+                            <Styled.LMLogo src={logo} alt='Logo da LM' />
+                        </Styled.Links>
+                    </Styled.NavBarBrand>
+                    <Styled.Navigation className='d-flex justify-content-evenly align-items-center'>
+                        {logged &&
+                            <>
+                                <Styled.NavigationLinks to="/account" className='mx-3'>Minha Conta</Styled.NavigationLinks>
+                                <button className='logout-button' onClick={handleLogout}>Sair</button>
+                                <Styled.NavigationLinks to="/post-ad" className="btn nav-button mx-3">Poste um anúncio</Styled.NavigationLinks>
+                            </>
+                        }
+                        {!logged &&
+                            <>
+                                <Styled.NavigationLinks to="/signin" className='mx-3'>Login</Styled.NavigationLinks>
+                                <Styled.NavigationLinks to="/signup" className='mx-3'>Cadastrar</Styled.NavigationLinks>
+                                <Styled.NavigationLinks to="/signin" className="btn nav-button mx-3">Poste um anúncio</Styled.NavigationLinks>
+                            </>
+                        }
+                    </Styled.Navigation>
+                </Styled.Wrapper>
+            </Styled.NavBar>
+        </Styled.Header>
     )
 }
 

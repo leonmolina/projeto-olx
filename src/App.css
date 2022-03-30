@@ -12,12 +12,14 @@ body {
 :root {
   --background: #CCCCCC;
   --background-alt: #DDDDDD;
-  --background-white: #FFFFFF;
+  --background-light: #FFFFFF;
   --background-search: #9BB83C;
   --text: #000000;
   --text-light: #999999;
+  --text-white: #FFFFFF;
   --border-grey: #CCCCCC;
   --box-shadow: 0, 0, 0;
+  --post-button: #FF8100;
 }
 /* FORM GROUPS */
 .area {
