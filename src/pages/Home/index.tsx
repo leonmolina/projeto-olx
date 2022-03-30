@@ -50,7 +50,7 @@ const Home = () => {
                         {/* SEARCH FORM */}
                         <Styled.SearchForm method="GET" action="/ads">
                             {/* SEARCH TEXT */}
-                            <Styled.SearchInputGroup className='col-lg-9 col-md-6 col-sm-6'>
+                            <Styled.SearchInputGroup className='col-lg-9 col-md-6 col-sm-6 px-2'>
                                 <Styled.SearchInput
                                         type="text"
                                         className="search-input--text"
@@ -59,7 +59,7 @@ const Home = () => {
                                 </Styled.SearchInput>
                             </Styled.SearchInputGroup>
                             {/* SEARCH SELECT */}
-                            <Styled.SearchInputGroup className='col-lg-1 col-md-4 col-sm-4'>
+                            <Styled.SearchInputGroup className='col-lg-1 col-md-4 col-sm-4 px-2'>
                                 <Styled.SearchSelect>
                                     {stateList.map((i, k)=>
                                         <option key={k} value={i.name}>{i.name}</option>
@@ -67,7 +67,7 @@ const Home = () => {
                                 </Styled.SearchSelect>
                             </Styled.SearchInputGroup>
                             {/* SEARCH BUTTON */}
-                            <Styled.SearchInputGroup className='col-lg-2 col-md-2 col-sm-2'>
+                            <Styled.SearchInputGroup className='col-lg-2 col-md-2 col-sm-2 px-2'>
                                 <Styled.SearchButton variant="primary" type="submit">Pesquisar</Styled.SearchButton>
                             </Styled.SearchInputGroup>
                         </Styled.SearchForm>

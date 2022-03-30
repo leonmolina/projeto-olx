@@ -17,7 +17,7 @@ body {
   --text: #000000;
   --text-light: #999999;
   --border-grey: #CCCCCC;
-  --box-shadow: #000000;
+  --box-shadow: 0, 0, 0;
 }
 /* FORM GROUPS */
 .area {
