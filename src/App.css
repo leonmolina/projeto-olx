@@ -8,6 +8,17 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: #EEE;
 }
+/* GLOBAL CSS VARIABLES */
+:root {
+  --background: #CCCCCC;
+  --background-alt: #DDDDDD;
+  --background-white: #FFFFFF;
+  --background-search: #9BB83C;
+  --text: #000000;
+  --text-light: #999999;
+  --border-grey: #CCCCCC;
+  --box-shadow: #000000;
+}
 /* FORM GROUPS */
 .area {
   display: flex;

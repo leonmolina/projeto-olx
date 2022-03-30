@@ -1,10 +1,13 @@
 // CSS AND BOOTSTRAP
 // REACT
 import { useEffect, useState } from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import AdItem from '../../components/partials/AdItem';
 // REQUISITION AND PARTIALS
 import useApi, { AdsInterface, Category, State } from '../../helpers/OlxApi';
-import * as Styled from './styles';
+import './style.css';
+
 
 const Home = () => {
 // API CALL AND USE STATES
@@ -43,60 +46,60 @@ const Home = () => {
     return (
         <>
             {/* SEARCH CONTAINER */}
-            <Styled.SearchArea>
-                <Styled.Wrapper>
+            <Container fluid className='search-area'>
+                <Container>
                     {/* SEARCH BAR */}
-                    <Styled.SearchBox>
+                    <div className="search-box">
                         {/* SEARCH FORM */}
-                        <Styled.SearchForm method="GET" action="/ads">
+                        <Form className="search-form row" method="GET" action="/ads">
                             {/* SEARCH TEXT */}
-                            <Styled.SearchInputGroup className='col-lg-9 col-md-6 col-sm-6'>
-                                <Styled.SearchInput
+                            <div className='col-lg-9 col-md-6 col-sm-6'>
+                                <Form.Control
                                         type="text"
-                                        className="search-input--text"
+                                        className="search-input search-input--text"
                                         name="q"
                                         placeholder='O que você procura?'>
-                                </Styled.SearchInput>
-                            </Styled.SearchInputGroup>
+                                </Form.Control>
+                            </div>
                             {/* SEARCH SELECT */}
-                            <Styled.SearchInputGroup className='col-lg-1 col-md-4 col-sm-4'>
-                                <Styled.SearchSelect>
+                            <div className='col-lg-1 col-md-4 col-sm-4'>
+                                <Form.Select name="state" className='search-input search-input--select'>
                                     {stateList.map((i, k)=>
                                         <option key={k} value={i.name}>{i.name}</option>
                                     )}
-                                </Styled.SearchSelect>
-                            </Styled.SearchInputGroup>
+                                </Form.Select>
+                            </div>
                             {/* SEARCH BUTTON */}
-                            <Styled.SearchInputGroup className='col-lg-2 col-md-2 col-sm-2'>
-                                <Styled.SearchButton variant="primary" type="submit">Pesquisar</Styled.SearchButton>
-                            </Styled.SearchInputGroup>
-                        </Styled.SearchForm>
-                    </Styled.SearchBox>
+                            <div className='col-lg-2 col-md-2 col-sm-2'>
+                                <Button variant="primary" type="submit" className="search-button">Pesquisar</Button>
+                            </div>
+                        </Form>
+                    </div>
                     {/* CATEGORY LIST */}
-                    <Styled.CategoryList>
+                    <div className="category-list">
                         {categories.map((i, k)=>
-                            <Styled.CategoryItem key={k} to={`/ads?cat=${i.slug}`}>
-                                <Styled.CategoryImage src={i.img} alt="Ícone da Categoria" />
-                                <Styled.CategoryName>{i.name}</Styled.CategoryName>
-                            </Styled.CategoryItem>
+                            <Link key={k} to={`/ads?cat=${i.slug}`} className='category-item'>
+                                <img src={i.img} alt="Ícone da Categoria" />
+                                <span>{i.name}</span>
+                            </Link>
                         )}
-                    </Styled.CategoryList>
-                </Styled.Wrapper>
-            </Styled.SearchArea>
+                    </div>
+                </Container>
+            </Container>
             {/* ADS CONTAINER */}
-            <Styled.Wrapper>
-                <Styled.HomePage>
-                    <Styled.HomeTitle>Anúncios Recentes</Styled.HomeTitle>
-                    <Styled.HomeList>
+            <Container>
+                <div className='home-page--area'>
+                    <h2>Anúncios Recentes</h2>
+                    <div className="list">
                         {adList.map((i, k)=>
                             <AdItem key={k} data={i}/>
                         )}
-                    </Styled.HomeList>
-                    <Styled.SeeAllLink to="/ads">Ver Todos</Styled.SeeAllLink>
+                    </div>
+                    <Link to="/ads" className='see-all-link'>Ver Todos</Link>
                     <hr />
                     <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo dolore pariatur voluptatum recusandae tempore eaque error quaerat temporibus cum labore ducimus rerum perferendis quasi, incidunt commodi possimus beatae eos voluptatem.</span>
-                </Styled.HomePage>
-            </Styled.Wrapper>
+                </div>
+            </Container>
         </>
     );
 }
