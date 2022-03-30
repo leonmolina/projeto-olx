@@ -1,7 +1,7 @@
 import { Container, Nav, Navbar, NavbarBrand } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
+import logo from '../../assets/images/logo-lm.png';
 import { doLogout, isLogged } from '../../helpers/AuthHandler';
-import logo from './images/logo-lm.png';
 import './style.css';
 
 

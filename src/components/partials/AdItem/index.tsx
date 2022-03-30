@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
+import noimage from '../../../assets/images/no-image.png';
 import { AnnouncedType } from '../../../helpers/OlxApi';
-import noimage from './images/sem-imagem.png';
 import './style.css';
 
 const noImage = noimage;
