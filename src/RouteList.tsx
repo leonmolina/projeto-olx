@@ -2,7 +2,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { isLogged } from './helpers/AuthHandler';
 import About from "./pages/About";
 import AddAd from "./pages/AddAd";
-import AdPage from "./pages/AdPage/index";
+import AdPage from "./pages/AdPage";
 import Ads from "./pages/Ads";
 import Home from "./pages/Home";
 import MyAccount from "./pages/MyAccount";

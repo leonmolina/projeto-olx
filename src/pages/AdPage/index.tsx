@@ -1,7 +1,7 @@
 // CSS AND BOOTSTRAP
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import AdItem from '../../components/partials/AdItem';
+import AdItem from '../../components/partials/AdItem/index';
 import Fake from '../../components/partials/Fake';
 import Slide from '../../components/partials/ImageSlide';
 import useApi, { Ad } from '../../helpers/OlxApi';
@@ -67,7 +67,9 @@ const AdPage = () => {
                             </Styled.ItemName>
                             <Styled.ItemDescription>
                                 {loading && <Fake height={100} />}
-                                {adInfo.description}
+                                {adInfo.description &&
+                                    <h5>{adInfo.description}</h5>
+                                }
                                 <hr />
                                 {adInfo.views &&
                                     <Styled.ItemDescriptionSmall>Visualizações: {adInfo.views}</Styled.ItemDescriptionSmall>
