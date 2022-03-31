@@ -47,4 +47,5 @@ const AdItem = (props: AnnouncedType) => {
         </div>
     );
 }
+
 export default AdItem;
