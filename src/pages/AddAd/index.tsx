@@ -1,26 +1,23 @@
-// BOOTSTRAP
-import { Form, Button, Container } from 'react-bootstrap';
 // REACT
 import React, { useEffect, useRef, useState } from 'react';
-// REQUISITION AND PARTIALS
-import useApi, {Category} from '../../helpers/OlxApi';
-import ErrorMessage from '../../components/partials/ErrorMessage';
+import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import ErrorMessage from '../../components/partials/ErrorMessage';
+// REQUISITION AND PARTIALS
+import useApi, { Category } from '../../helpers/OlxApi';
+import * as Styled from './styles';
 
 const AddAd = () => {
 // API CALL AND USE STATES
     const api = useApi();
     const fileField = useRef<HTMLInputElement | any>(null);
     const navigate = useNavigate();
-
     const [categories, setCategories] = useState<Category[]>([]);
-
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState('');
     const [priceNegotiable, setPriceNegotiable] = useState(false);
     const [desc, setDesc] = useState('');
-    
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState('');
 
@@ -38,7 +35,6 @@ const AddAd = () => {
         setDisabled(true);
         setError('')
         let errors = [];
-
         if(!title.trim()) {
             errors.push('Sem título');
         }
@@ -58,7 +54,6 @@ const AddAd = () => {
                     fData.append('img', fileField.current.files[i]);
                 }
             }
-
             const json = await api.addAd(fData);
 
             if(!json.error) {
@@ -67,7 +62,6 @@ const AddAd = () => {
             } else {
                 setError(json.error)
             }
-
         } else {
             setError(errors.join("\n"));
         }
@@ -76,22 +70,22 @@ const AddAd = () => {
 
     return (
         <>
-            {/* LOGIN CONTAINER */}
-            <Container>
+            {/* ADD AD CONTAINER */}
+            <Styled.Wrapper>
                 {/* TITLE */}
-                <div className="forms-title">
+                <Styled.FormsAreaTitle>
                     <h3>Poste um anúncio</h3>
-                </div>
-                {/* LOGIN AREA */}
-                <div>
+                </Styled.FormsAreaTitle>
+                {/* ADD AD AREA */}
+                <Styled.AddAdArea>
                     {error &&
                         <ErrorMessage text={error}/>
                     }
                     {/* FORM */}
-                    <Form onSubmit={handleSubmit} className="forms">
+                    <Styled.Forms onSubmit={handleSubmit}>
                         {/* EMAIL */}
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Titulo</Form.Label>
+                        <Styled.FormsArea className="mb-1">
+                            <Styled.FormTitle>Titulo</Styled.FormTitle>
                             <Form.Control 
                                 type="text"
                                 className='area-input'
@@ -100,23 +94,23 @@ const AddAd = () => {
                                 onChange={e=>setTitle(e.target.value)} 
                                 required
                             />
-                        </Form.Group>
+                        </Styled.FormsArea>
                         {/* PASSWORD */}
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Categoria</Form.Label>
+                        <Styled.FormsArea className="mb-1">
+                            <Styled.FormTitle>Categoria</Styled.FormTitle>
                             <Form.Select className="area-input" disabled={disabled} value={category} onChange={e=>setCategory(e.target.value)} required>
-                                <option></option>
+                                <option></option>Styled.FormTitle
                                 {categories &&
                                     categories.map(i =>
                                         <option key={i._id} value={i._id}>{i.name}</option>
                                     )
                                 }
                             </Form.Select>
-                        </Form.Group>
+                        </Styled.FormsArea>
                         {/* CONFIRM PASSWORD */}
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Preço</Form.Label>
-                            <span className='span-currency'>R$:</span>
+                        <Styled.FormsArea className="mb-1">
+                            <Styled.FormTitle>Preço</Styled.FormTitle>
+                            <Styled.FormCurrencySpan>R$:</Styled.FormCurrencySpan>
                             <Form.Control 
                                 type="text"
                                 className='area-input'
@@ -125,18 +119,18 @@ const AddAd = () => {
                                 onChange={e=>setPrice(e.target.value)} 
                                 required
                             />
-                        </Form.Group>
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Preço Negociável</Form.Label>
+                        </Styled.FormsArea>
+                        <Styled.FormsArea className="mb-1">
+                            <Styled.FormTitle>Preço Negociável</Styled.FormTitle>
                             <Form.Check
                                 type="checkbox"
                                 disabled={disabled}
                                 checked={priceNegotiable}
                                 onChange={()=>setPriceNegotiable(!priceNegotiable)}
                             />
-                        </Form.Group>
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Descrição</Form.Label>
+                        </Styled.FormsArea>
+                        <Styled.FormsArea className="mb-1">
+                            <Styled.FormTitle>Descrição</Styled.FormTitle>
                             <Form.Control 
                                 as="textarea"
                                 className='area-input'
@@ -145,9 +139,9 @@ const AddAd = () => {
                                 onChange={e=>setDesc(e.target.value)} 
                                 required
                             />
-                        </Form.Group>
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Imagens (1 ou mais)</Form.Label>
+                        </Styled.FormsArea>
+                        <Styled.FormsArea className="mb-1">
+                            <Styled.FormTitle>Imagens (1 ou mais)</Styled.FormTitle>
                             <Form.Control 
                                 type="file"
                                 className='area-input'
@@ -155,15 +149,15 @@ const AddAd = () => {
                                 ref={fileField}
                                 multiple
                             />
-                        </Form.Group>
+                        </Styled.FormsArea>
                         {/* SUBMIT BUTTON */}
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'></Form.Label>
+                        <Styled.FormsArea className="mb-1">
+                            <Styled.FormTitle></Styled.FormTitle>
                             <Button variant="primary" type="submit" disabled={disabled}>Adicionar Anúncio</Button>
-                        </Form.Group>
-                    </Form>
-                </div>
-            </Container>
+                        </Styled.FormsArea>
+                    </Styled.Forms>
+                </Styled.AddAdArea>
+            </Styled.Wrapper>
         </>
 
     );
