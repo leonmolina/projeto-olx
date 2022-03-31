@@ -1,12 +1,12 @@
-import './style.css';
+import * as Styled from './styles';
 
 type Props = {
-    height: number
+    height: string;
 }
 
-const Fake = ({height}: Props) => {
+const Fake = (props: Props) => {
     return (
-        <div className="fake" style={{height: height}}></div>
+        <Styled.Fake height={props.height}></Styled.Fake>
     );
 }
 

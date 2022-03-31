@@ -50,14 +50,14 @@ const AdPage = () => {
                 <Styled.PageLeftSide>
                     <Styled.Box>
                         <Styled.ItemImage>
-                            {loading && <Fake height={300} />}
+                            {loading && <Fake height={'300'} />}
                             {adInfo.images &&
                                 <Slide images={adInfo.images}/>
                             }
                         </Styled.ItemImage>
                         <Styled.ItemInfo>
                             <Styled.ItemName>
-                                {loading && <Fake height={20} />}
+                                {loading && <Fake height={'20'} />}
                                 {adInfo.title &&
                                     <Styled.ItemNameTitle>{adInfo.title}</Styled.ItemNameTitle>
                                 }   
@@ -66,7 +66,7 @@ const AdPage = () => {
                                 }
                             </Styled.ItemName>
                             <Styled.ItemDescription>
-                                {loading && <Fake height={100} />}
+                                {loading && <Fake height={'100'} />}
                                 {adInfo.description &&
                                     <h5>{adInfo.description}</h5>
                                 }
@@ -80,7 +80,7 @@ const AdPage = () => {
                 </Styled.PageLeftSide>
                 <Styled.PageRightSide>
                     <Styled.Box className="box-padding">
-                        {loading && <Fake height={20} />}
+                        {loading && <Fake height={'20'} />}
                         {adInfo.priceNegotiable && 
                             "Preço Negociável"
                         }
@@ -88,7 +88,7 @@ const AdPage = () => {
                             <Styled.BoxPrice className="price">Preço: <Styled.BoxPriceSpan>R$ {adInfo.price}</Styled.BoxPriceSpan></Styled.BoxPrice>
                         }
                     </Styled.Box>
-                    {loading && <Fake height={50} />}
+                    {loading && <Fake height={'50'} />}
                     {adInfo.userInfo &&
                         <Styled.SellerInfoArea>
                             <Styled.SellerContactLink href={`mailto:${adInfo.userInfo.email}`} target="_blank" className='btn btn-primary contactSellerLink'>Fale com o vendedor</Styled.SellerContactLink>
