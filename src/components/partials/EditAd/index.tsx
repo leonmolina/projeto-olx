@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import useApi, { AnnouncedType, Category } from '../../../helpers/OlxApi';
-import './style.css';
+import * as Styled from './styles';
 
 
 const EditAd = (props: AnnouncedType) => {
@@ -80,32 +79,32 @@ const EditAd = (props: AnnouncedType) => {
         setDisabled(false);
     }
     return (
-        <div className='announced-item'>
-            <Link to={`/ad/${props.data.id}`} onClick={handleClick}>
-                <div className="item-image">
+        <Styled.AnnouncedItem>
+            <Styled.AnnouncedLink to={`/ad/${props.data.id}`} onClick={handleClick}>
+                <Styled.ItemImageArea>
                     {props.data.images &&
-                        <img
+                        <Styled.ItemImage
                         // SHOWS ONLY THE FIRST IMAGE OF THE PRODUCT ON MY-ACCOUNT PAGE
                         src={`http://alunos.b7web.com.br:501/media/${props.data.images[0].url}`}
                         alt="Primeira imagem do produto anunciado"
                         />
                     }
                     {!props.data.images &&
-                        <img src={props.data.image} alt="Imagem do produto anunciado" />
+                        <Styled.ItemImage src={props.data.image} alt="Imagem do produto anunciado" />
                     }
-                </div>
-                <div className="item-name">
+                </Styled.ItemImageArea>
+                <Styled.ItemName>
                     {props.data.title}
-                </div>
-                <div className="item-price">
+                </Styled.ItemName>
+                <Styled.ItemPrice>
                     {props.data.priceNegotiable &&
                         'Preço Negociável'
                     }
                     {!props.data.priceNegotiable && props.data.price &&
                         `${props.data.price}`
                     }
-                </div>
-            </Link>
+                </Styled.ItemPrice>
+            </Styled.AnnouncedLink>
             <div className="align-self-center my-2 container-fluid">
                 <button onClick={() => showModal(props.data.id)} type="button" className="btn btn-primary">Editar</button>
             </div>
@@ -189,7 +188,7 @@ const EditAd = (props: AnnouncedType) => {
                     </Modal.Footer>
                 </Form>
             </Modal>
-        </div>
+        </Styled.AnnouncedItem>
     );
 }
 export default EditAd;
