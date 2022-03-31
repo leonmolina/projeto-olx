@@ -15,12 +15,15 @@ body {
   --background-announced: #EEEEEE;
   --background-light: #FFFFFF;
   --background-search: #9BB83C;
+  --seller-background: #0000FF;
   --text: #000000;
   --text-light: #999999;
   --text-white: #FFFFFF;
+  --text-blue: #0000FF;
   --border-white: #FFFFFF;
   --border-grey: #CCCCCC;
   --box-shadow: 0, 0, 0;
+  --box-shadow--grey: #999999;
   --post-button: #FF8100;
 }
 /* FORM GROUPS */
