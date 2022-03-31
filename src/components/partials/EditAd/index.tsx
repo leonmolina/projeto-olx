@@ -98,7 +98,12 @@ const EditAd = (props: AnnouncedType) => {
                     {props.data.title}
                 </div>
                 <div className="item-price">
-                    {props.data.price}
+                    {props.data.priceNegotiable &&
+                        'Preço Negociável'
+                    }
+                    {!props.data.priceNegotiable && props.data.price &&
+                        `${props.data.price}`
+                    }
                 </div>
             </Link>
             <div className="align-self-center my-2 container-fluid">
