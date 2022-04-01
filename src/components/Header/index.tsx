@@ -23,7 +23,7 @@ const Header = () => {
                         {logged &&
                             <>
                                 <Styled.NavigationLinks to="/account" className='mx-3'>Minha Conta</Styled.NavigationLinks>
-                                <button className='logout-button' onClick={handleLogout}>Sair</button>
+                                <Styled.LogoutButton className='logout-button' onClick={handleLogout}>Sair</Styled.LogoutButton>
                                 <Styled.NavigationLinks to="/post-ad" className="btn nav-button mx-3">Poste um anúncio</Styled.NavigationLinks>
                             </>
                         }

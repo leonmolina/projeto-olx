@@ -34,6 +34,9 @@ export const NavigationLinks = styled(NavLink)`
     &.nav-button {
         background-color: var(--post-button);
         color: var(--text-white);
+        &:hover{
+            color: var(--text);
+        }
     }
 `
 export const LogoutButton = styled.button`
