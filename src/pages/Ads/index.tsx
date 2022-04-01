@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Container, Pagination } from 'react-bootstrap';
+import { Pagination } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AdItem from '../../components/partials/AdItem';
 import useApi, { AdsInterface, Category, State } from '../../helpers/OlxApi';
 import './style.css';
+import * as Styled from './styles';
 
 // TIMER VARIABLE
 let timer: any;
@@ -140,9 +141,9 @@ const Ads = () => {
     }
 
     return (
-        <Container>
-            <div className="ad-page--area">
-                <div className="ad-page--leftSide">
+        <Styled.Wrapper>
+            <Styled.AdPage>
+                <Styled.AdPageLeftSide>
                     <form method="GET">
                         <input
                         type="text"
@@ -159,22 +160,22 @@ const Ads = () => {
                                 )}
                             </select>
                         <div className="filterName">Categoria:</div>
-                        <ul>
+                        <Styled.CategoryList>
                             {categories.map((i, k)=>
-                                <li
+                                <Styled.CategoryItem
                                 key={k}
-                                className={cat== i.slug?'categoryItem active':'categoryItem'}
+                                className={cat== i.slug?'active':''}
                                 onClick={()=>setCat(i.slug)}
                                 >
-                                    <img src={i.img} alt="Imagem da categoria" />
+                                    <Styled.CategoryImage src={i.img} alt="Imagem da categoria" />
                                     <span>{i.name}</span>
-                                </li>
+                                </Styled.CategoryItem>
                             )}
-                        </ul>
+                        </Styled.CategoryList>
                     </form>
-                </div>
-                <div className="ad-page--rightSide">
-                    <h2>Resultados</h2>
+                </Styled.AdPageLeftSide>
+                <Styled.AdPageRightSide>
+                    <Styled.AdPageTitles>Resultados</Styled.AdPageTitles>
                     {loading && adList.length === 0 &&
                         <div className="list-warning">Carregando...</div>
                     }
@@ -209,9 +210,9 @@ const Ads = () => {
                         <Pagination.Last />
                     </Pagination>
 
-                </div>
-            </div>
-        </Container>
+                </Styled.AdPageRightSide>
+            </Styled.AdPage>
+        </Styled.Wrapper>
     );
 }
 
