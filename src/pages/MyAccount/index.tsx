@@ -1,11 +1,10 @@
 // REACT
 import { useEffect, useState } from 'react';
-import { Button, Container, Form, Modal } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Button, Form, Modal } from 'react-bootstrap';
 import EditAd from '../../components/partials/EditAd';
 // REQUISITION AND PARTIALS
 import useApi, { Category, State, UserType } from '../../helpers/OlxApi';
-import './style.css';
+import * as Styled from './styles';
 
 const MyAccount = () => {
 // API CALL AND USE STATES
@@ -68,36 +67,36 @@ const MyAccount = () => {
     }
 
     return (
-        <Container className="my-account">
-            <h2>Minha Conta</h2>
-            <div className="account-details">
-                <div className="account-details__name">
+        <Styled.Wrapper>
+            <Styled.AccountTitle>Minha Conta</Styled.AccountTitle>
+            <Styled.AccountDetails>
+                <Styled.AccountName>
                     {userInfo &&
                         <span>{userInfo.name}</span>
                     }
-                </div>
-                <div className="account-details__email">
+                </Styled.AccountName>
+                <Styled.AccountEmail>
                     {userInfo &&
                         <span>{userInfo.email}</span>
                     }
-                </div>
-                <div className="account-details__state">
+                </Styled.AccountEmail>
+                <Styled.AccountState>
                     {userInfo &&
                         <span>{userInfo.state}</span>
                     }
-                </div>
-                <div className="d-flex justify-content-end">
+                </Styled.AccountState>
+                <Styled.AccountEditButtonArea>
                     <button type="button" className="btn btn-primary" onClick={handleModal}>Editar informações</button>
-                </div>
-            </div>
+                </Styled.AccountEditButtonArea>
+            </Styled.AccountDetails>
             <Modal show={isOpen} onHide={handleModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Altere suas informações</Modal.Title>
                 </Modal.Header>
-                <Form onSubmit={handleUserNewInfo}>
+                <Styled.Forms onSubmit={handleUserNewInfo}>
                     <Modal.Body>
-                        <Form.Group>
-                            <Form.Label>Alterar o Nome</Form.Label>
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel>Alterar o Nome</Styled.FormsLabel>
                             <Form.Control
                                 type="text"
                                 placeholder="Substituir o nome"
@@ -105,9 +104,9 @@ const MyAccount = () => {
                                 disabled={disabled}
                                 onChange={e=>setName(e.target.value)}
                             />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Alterar Estado</Form.Label>
+                        </Styled.FormsGroup>
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel>Alterar Estado</Styled.FormsLabel>
                             <Form.Select
                                 value={state}
                                 disabled={disabled}
@@ -118,9 +117,9 @@ const MyAccount = () => {
                                     <option key={k} value={i._id}>{i.name}</option>
                                 )}
                             </Form.Select>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Alterar o Email</Form.Label>
+                        </Styled.FormsGroup>
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel>Alterar o Email</Styled.FormsLabel>
                             <Form.Control
                                 type="email"
                                 placeholder="Substituir o email"
@@ -128,9 +127,9 @@ const MyAccount = () => {
                                 disabled={disabled}
                                 onChange={e=>setEmail(e.target.value)}
                             />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Alterar a Senha</Form.Label>
+                        </Styled.FormsGroup>
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel>Alterar a Senha</Styled.FormsLabel>
                             <Form.Control
                                 type="password"
                                 placeholder="Substituir a senha"
@@ -138,30 +137,30 @@ const MyAccount = () => {
                                 disabled={disabled}
                                 onChange={e=>setPassword(e.target.value)}
                             />
-                        </Form.Group>
+                        </Styled.FormsGroup>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="danger" type="button" onClick={handleModal}>Cancelar</Button>
                         <Button variant="success" type="submit">Salvar</Button>
                     </Modal.Footer>
-                </Form>
+                </Styled.Forms>
             </Modal>
-            <div className='my-announced'>
-                <h2>Meus anúncios</h2>
-                <div className="list">
+            <Styled.MyAnnounced>
+                <Styled.MyAnnouncedTitle>Meus anúncios</Styled.MyAnnouncedTitle>
+                <Styled.AnnouncedList>
                     {adList.map((i, k)=>
                         <EditAd key={k} data={i}/>
                     )}
-                </div>
-                <Link to="/ads" className='see-all-link'>Ver Todos</Link>
+                </Styled.AnnouncedList>
+                <Styled.SeeAllLink to="/ads">Ver Todos</Styled.SeeAllLink>
                 <hr />
                 <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Explicabo dolore pariatur voluptatum recusandae tempore eaque error
                     quaerat temporibus cum labore ducimus rerum perferendis quasi,
                     incidunt commodi possimus beatae eos voluptatem.
                 </span>
-            </div>
-        </Container>
+            </Styled.MyAnnounced>
+        </Styled.Wrapper>
     );
 }
 
