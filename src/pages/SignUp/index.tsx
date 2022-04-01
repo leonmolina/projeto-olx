@@ -1,11 +1,12 @@
 // BOOTSTRAP
-import { Form, Button, Container } from 'react-bootstrap';
 // REACT
-import React, { useState, useEffect } from 'react';
-// REQUISITION AND PARTIALS
-import useApi, {State} from '../../helpers/OlxApi';
-import { doLogin } from '../../helpers/AuthHandler';
+import React, { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import ErrorMessage from '../../components/partials/ErrorMessage';
+import { doLogin } from '../../helpers/AuthHandler';
+// REQUISITION AND PARTIALS
+import useApi, { State } from '../../helpers/OlxApi';
+import * as Styled from './styles';
 
 const SignUp = () => {
 // API CALL AND USE STATES
@@ -51,22 +52,22 @@ const SignUp = () => {
     return (
         <>
             {/* SIGN UP CONTAINER */}
-            <Container>
+            <Styled.Wrapper>
                 {/* TITLE */}
-                <div className="forms-title">
+                <Styled.FormsTitleArea>
                     <h3>Cadastro</h3>
-                </div>
+                </Styled.FormsTitleArea>
                 {/* SIGN UP AREA */}
-                <div>
+                <Styled.SignUpArea>
                     {error &&
                         <ErrorMessage text={error}/>
                     }
                     {/* FORM */}
-                    <Form onSubmit={handleSubmit} className="forms">
+                    <Styled.Forms onSubmit={handleSubmit}>
                         {/* NAME */}
-                        <Form.Group className="area">
-                            <Form.Label className='area-title'>Nome Completo</Form.Label>
-                            <Form.Control 
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel>Nome Completo</Styled.FormsLabel>
+                            <Form.Control
                                 type="text"
                                 className='area-input'
                                 disabled={disabled}
@@ -74,19 +75,19 @@ const SignUp = () => {
                                 onChange={e=>setName(e.target.value)} 
                                 required
                             />
-                        </Form.Group>
+                        </Styled.FormsGroup>
                         {/* STATE SELECT */}
-                        <Form.Group className="area">
-                            <Form.Label className='area-title'>Estado</Form.Label>
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel>Estado</Styled.FormsLabel>
                             <Form.Select className="area-input"value={stateLoc} onChange={e=>setStateLoc(e.target.value)} required>
                                 {stateList.map((i, k) =>
                                     <option key={k} value={i._id}>{i.name}</option>
                                 )}
                             </Form.Select>
-                        </Form.Group>
+                        </Styled.FormsGroup>
                         {/* EMAIL */}
-                        <Form.Group className="area">
-                            <Form.Label className='area-title'>E-mail</Form.Label>
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel>E-mail</Styled.FormsLabel>
                             <Form.Control 
                                 type="email"
                                 className='area-input'
@@ -95,10 +96,10 @@ const SignUp = () => {
                                 onChange={e=>setEmail(e.target.value)} 
                                 required
                             />
-                        </Form.Group>
+                        </Styled.FormsGroup>
                         {/* PASSWORD */}
-                        <Form.Group className="area">
-                            <Form.Label className='area-title'>Senha</Form.Label>
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel>Senha</Styled.FormsLabel>
                             <Form.Control
                                 type="password"
                                 className='area-input'
@@ -107,10 +108,10 @@ const SignUp = () => {
                                 onChange={e=>setPassword(e.target.value)}
                                 required
                             />
-                        </Form.Group>
+                        </Styled.FormsGroup>
                         {/* CONFIRM PASSWORD */}
-                        <Form.Group className="area">
-                            <Form.Label className='area-title'>Confirmar Senha</Form.Label>
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel>Confirmar Senha</Styled.FormsLabel>
                             <Form.Control
                                 type="password"
                                 className='area-input'
@@ -119,15 +120,15 @@ const SignUp = () => {
                                 onChange={e=>setConfirmPassword(e.target.value)}
                                 required
                             />
-                        </Form.Group>
+                        </Styled.FormsGroup>
                         {/* SUBMIT BUTTON */}
-                        <Form.Group className="area">
-                            <Form.Label className='area-title'></Form.Label>
+                        <Styled.FormsGroup>
+                            <Styled.FormsLabel></Styled.FormsLabel>
                             <Button variant="primary" type="submit" disabled={disabled}>Fazer Cadastro</Button>
-                        </Form.Group>
-                    </Form>
-                </div>
-            </Container>
+                        </Styled.FormsGroup>
+                    </Styled.Forms>
+                </Styled.SignUpArea>
+            </Styled.Wrapper>
         </>
     );
 }

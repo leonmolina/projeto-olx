@@ -1,11 +1,12 @@
 // BOOTSTRAP
-import { Form, Button, Container } from 'react-bootstrap';
 // REACT
 import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import ErrorMessage from '../../components/partials/ErrorMessage';
+import { doLogin } from '../../helpers/AuthHandler';
 // REQUISITION AND PARTIALS
 import useApi from '../../helpers/OlxApi';
-import { doLogin } from '../../helpers/AuthHandler';
-import ErrorMessage from '../../components/partials/ErrorMessage';
+import * as Styled from './styles';
 
 const SignIn = () => {
 // API CALL AND USE STATES
@@ -35,21 +36,21 @@ const SignIn = () => {
     return (
         <>
             {/* LOGIN CONTAINER */}
-            <Container>
+            <Styled.Wrapper>
                 {/* TITLE */}
-                <div className="forms-title">
+                <Styled.FormsTitleArea>
                     <h3>Login</h3>
-                </div>
+                </Styled.FormsTitleArea>
                 {/* LOGIN AREA */}
-                <div>
+                <Styled.SignInArea>
                     {error &&
                         <ErrorMessage text={error}/>
                     }
                     {/* FORM */}
-                    <Form onSubmit={handleSubmit} className="forms">
+                    <Styled.Forms onSubmit={handleSubmit}>
                         {/* EMAIL */}
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>E-mail</Form.Label>
+                        <Styled.FormsGroup className="mb-1">
+                            <Styled.FormsLabel>E-mail</Styled.FormsLabel>
                             <Form.Control 
                                 type="email"
                                 className='area-input'
@@ -58,10 +59,10 @@ const SignIn = () => {
                                 onChange={e=>setEmail(e.target.value)} 
                                 required
                             />
-                        </Form.Group>
+                        </Styled.FormsGroup>
                         {/* PASSWORD */}
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Senha</Form.Label>
+                        <Styled.FormsGroup className="mb-1">
+                            <Styled.FormsLabel>Senha</Styled.FormsLabel>
                             <Form.Control
                                 type="password"
                                 className='area-input'
@@ -70,25 +71,25 @@ const SignIn = () => {
                                 onChange={e=>setPassword(e.target.value)}
                                 required
                             />
-                        </Form.Group>
+                        </Styled.FormsGroup>
                         {/* CONFIRM PASSWORD */}
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'>Lembrar Senha</Form.Label>
+                        <Styled.FormsGroup className="mb-1">
+                            <Styled.FormsLabel>Lembrar Senha</Styled.FormsLabel>
                             <Form.Check
                                 type="checkbox"
                                 disabled={disabled}
                                 checked={rememberPassword}
                                 onChange={()=>setRememberPassword(!rememberPassword)}
                             />
-                        </Form.Group>
+                        </Styled.FormsGroup>
                         {/* SUBMIT BUTTON */}
-                        <Form.Group className="mb-1 area">
-                            <Form.Label className='area-title'></Form.Label>
+                        <Styled.FormsGroup className="mb-1">
+                            <Styled.FormsLabel></Styled.FormsLabel>
                             <Button variant="primary" type="submit" disabled={disabled}>Fazer Login</Button>
-                        </Form.Group>
-                    </Form>
-                </div>
-            </Container>
+                        </Styled.FormsGroup>
+                    </Styled.Forms>
+                </Styled.SignInArea>
+            </Styled.Wrapper>
         </>
 
     );
