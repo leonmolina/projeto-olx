@@ -36,3 +36,9 @@ textarea {
   resize: none;
   font-size: 14px;
 }
+/* PAGINATION ON "ADS" PAGE */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

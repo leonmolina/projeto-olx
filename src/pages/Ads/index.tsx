@@ -3,7 +3,6 @@ import { Pagination } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AdItem from '../../components/partials/AdItem';
 import useApi, { AdsInterface, Category, State } from '../../helpers/OlxApi';
-import './style.css';
 import * as Styled from './styles';
 
 // TIMER VARIABLE
