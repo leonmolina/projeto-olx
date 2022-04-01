@@ -23,7 +23,6 @@ const MyAccount = () => {
     const [email, setEmail] = useState('');
     const [state, setState] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
 // USER - USE EFFECT
     useEffect(()=>{
         const getUser = async () => {

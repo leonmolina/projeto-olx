@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 export const AnnouncedItem = styled.div`
+    width: 25%;
 `
 export const AnnouncedLink = styled(Link)`
     display: block;

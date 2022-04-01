@@ -20,7 +20,7 @@ const AdItem = (props: AnnouncedType) => {
     }
 
     return (
-        <Styled.Announced width={'25%'}>
+        <Styled.Announced>
             <Styled.AnnouncedBody to={`/ad/${props.data.id}`}>
                 <Styled.AnnouncedImageArea className="item-image">
                     {props.data.images &&

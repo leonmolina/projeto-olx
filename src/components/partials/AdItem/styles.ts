@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-type Props = {
-    width: string;
-}
-export const Announced = styled.div<Props>`
-    width: ${props => props.width ? props.width : 'auto'}
+
+export const Announced = styled.div`
+    width: 25%;
 `
 export const AnnouncedBody = styled(Link)`
     display: block;
