@@ -1,6 +1,6 @@
 # Project
 
-The original project is from B7Web's React course. I'm adapting it to Typescript and Bootstrap.
+The original project is from B7Web's ReactJS course. I'm adapting it to Typescript and Bootstrap.
 
 ### Installing
 
